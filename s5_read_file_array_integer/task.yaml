@@ -1,0 +1,56 @@
+accessible: true
+author: Olivier Martin, Cyril Pletinckx, Minh-Phuong Tran
+context: |-
+    *Estimated time: 25 minutes*
+
+    Given a binary file containing some (possibly none) positive integers (``int``) that were stored in a file, write a code that computes the sum of all of these integers. The function returns the sum when there are no errors. In case of errors, it returns.
+
+    - If ``open()`` fails, return ``-1``.
+    - If ``close()`` fails, return ``-2``.
+    - If ``mmap()`` fails, return ``-3``.
+    - If ``munmap()`` fails, return ``-4``.
+    - If ``fstat()`` fails, return ``-5``.
+
+    You can only use ``open(2)``, ``mmap(2)``, ``munmap(2)``, ``fstat(2)`` and ``close(2)``.
+
+    **Hint** : ``fstat(2)`` is mandatory to know the size of the file and thus with a simple formula, the number of integers that are stored in it (find it !).
+environment: cpp
+evaluate: best
+groups: false
+input_random: '0'
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[S5] Reading integers in a binary file'
+network_grading: false
+order: 37
+problems:
+    q1:
+        header: |-
+            .. code-block:: c
+
+                /*
+                 * @pre filename != NULL, name of the file
+                 * @post returns the sum of all integers stored in the binary file.
+                 *       return -1 if the file can not be open.
+                 *       return -2 if the file can not be closed.
+                 *       return -3 if mmap() fails.
+                 *       return -4 if munmap() fails.
+                 *       return -5 if fstat() fails.
+                 */
+                int sum_file(char *filename) {
+        name: Write your code here
+        language: c
+        default: ''
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0
+categories:
+- s5
+- category_mmap
+- category_file
+- level4

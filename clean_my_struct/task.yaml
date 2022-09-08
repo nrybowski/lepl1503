@@ -1,0 +1,55 @@
+accessible: true
+author: Guillaume Donckers Anthony Doeraene
+categories: []
+contact_url: ''
+context: |-
+    Une structure de données contenant le NOMA et les points d'un ancien étudiant vous est donnée. Certaines structures peuvent ne pas contenir certaines informations.
+    Vous devez enlever les points de l'ancien étudiant de la mémoire, sans supprimer la structure, et préparer la structure pour qu'elle contienne le NOMA du nouvel
+    étudiant ainsi que le tableau prêt à accueillir ses points.
+
+    .. code-block:: c
+
+        typedef struct{
+            int* number;
+            int** matrix; // x rows, 2 columns (course id, grade)
+        } data;
+
+    La structure est composée d'un pointeur vers un entier (:code:`int* number`) et d'un pointeur vers un tableau de données (:code:`int** matrix`) contenant x lignes et 2 colonnes.
+    ex : :code:`[[1503,15],[1401,19],[1210,14]]`
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Clean my struct
+network_grading: false
+problems:
+    clean:
+        type: code
+        name: Clean my struct
+        header: |4-
+                .. code-block:: c
+
+                    /*
+                     *@pre int NOMA != NULL
+                     *@pre int oldNumberOfCourses != NULL : qui contient le nombre de cours de l'ancien étudiant
+                     *@pre int newNumberOfCourses != NULL : qui contient le nombre de cours du nouvel étudiant
+                     *@pre data* datas != NULL : un pointeur vers la structure qui contient les données
+                     *@post la structure contient un tableau vide aux bonnes dimensions et le NOMA du nouvel étudiant
+                     *@post retourner 0 si tout se passe bien et -1 en cas d'erreurs
+                     */
+                    int CleanMyStructure(int NOMA, int oldNumberOfCourses, int newNumberOfCourses, data* datas);
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

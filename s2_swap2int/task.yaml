@@ -1,0 +1,40 @@
+accessible: true
+author: Arthur van Stratum
+categories:
+- s2
+- category_pointer
+- level1
+contact_url: ''
+context: ''
+environment_id: cpp
+environment_parameters:
+    limits:
+        hard_time: ''
+        time: '30'
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S2] Swap my integers '
+network_grading: false
+order: 15
+problems:
+    q1:
+        header: |-
+            Write the body of the function *swap* which exchanges the values pointed by *i* and *j*.
+
+            .. code-block:: c
+
+                void swap(int *i, int *j) {
+        name: Swap
+        type: code
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

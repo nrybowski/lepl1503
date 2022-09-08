@@ -1,0 +1,89 @@
+accessible: false
+author: Louis Navarre & Alexandre Gobeaux
+categories:
+- s3
+- category_pointer
+- category_free
+- category_malloc
+- level4
+contact_url: ''
+context: |-
+    Given the following structure *university_t*:
+
+    .. code-block:: c
+
+        typedef struct university {
+            char* city;
+            int creation;
+            person_t* rector;
+        } university_t;
+
+    And the structure *person_t*:
+
+    .. code-block:: c
+
+        typedef struct person {
+            char* name;
+            int salary;
+            int age;
+        } person_t;
+
+    You are asked to implement the functions ``init_all`` and ``free_all``, which respectively initialises the structure *university_t* and frees all the memory associated with it.
+
+    The *name* and the *city* have been allocated with *malloc*.
+
+    *Hint:* all the data may not have been initialised correctly. Therefore, you have to handle all the cases (e.g. some pointers can be already NULL, and don't need to be freed).
+environment_id: cpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '30'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S3] Manipulate the memory'
+network_grading: false
+order: 28
+problems:
+    init_all:
+        header: |-
+            Write the body of the function ``init_all``. You must copy the strings.
+
+            *Hint :* Use strcpy.
+
+            .. code-block:: c
+
+                /*
+                 * @city != NULL
+                 * @rectname != NULL
+                 * @return: a pointer to the university structure containing the elements
+                 */
+                 university_t* init_all(char* city, int creation, char* rectname, int age, int salary){
+        language: c
+        name: Init all
+        type: code
+        default: ''
+    free_all:
+        language: c
+        name: Free all
+        type: code
+        default: ''
+        header: |-
+            Write the body of the function ``free_all``.
+
+            .. code-block:: c
+
+                /*
+                 * Frees all the memory associated with u
+                 * @pre: u != NULL
+                 */
+                 void free_all(university_t* u){
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 0.0

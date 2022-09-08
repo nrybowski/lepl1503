@@ -1,0 +1,97 @@
+accessible: true
+author: Hugo Siberdt Anthony Doeraene
+categories: []
+contact_url: ''
+context: |-
+    Dans cet exercice, vous êtes chargés d'implémenter une fonction permettant d'ajouter un objet à une liste d'achat d'un client.
+
+    Vous disposez des deux structure suivantes:
+
+        .. code-block:: c
+
+            typedef struct
+            {
+                unsigned int price;
+                char * name;
+            } stuff_t;
+
+            typedef struct
+            {
+                stuff_t ** bag;
+                char * name;
+                unsigned int bagSize;
+                unsigned int total;
+                unsigned int budget;
+                char** dontLike;
+                unsigned int size;
+            } consumer_t;
+
+    Le client dispose par défaut d'un sac (:code:`bag`) de taille :code:`bagsize` rempli d'objets (:code:`stuff_t`) vides (représentés par :code:`NULL`) représentant les places disponibles dans le sac.
+    Le sac fonctionne comme une pile, c'est à dire que les objets achetés sont placés dedans l'un à la suite de l'autre.
+    La variable :code:`dontLike` est une liste de taille :code:`size` contenant des :code:`char*` représentant le nom des articles que le client n'aime pas.
+
+    On vous demande d'écrire une fonction baptisée AddStuff.
+
+    Exemples d'utilisation:
+
+    Supposons un client dont le nom est Maximus, qui dispose d'un sac de taille 10 d'un budget de 5000 et qui n'aime pas la "salade" ni le "poisson" (:code:`dontLike = ["salade", "poisson"]`).
+
+    - :code:`AddStuff(client, "teddy bear", 10);` ajoute au sac de Maximus l'objet "teddy bear". Il y a donc 1 "teddy bear" et 9 objets "vide" dans le sac pour un coût total de 10.
+    - :code:`AddStuff(client, "salade", 5);` n'ajoute rien au sac de Maximus car il n'aime pas la salade. Il y a donc 1 "teddy bear" et 9 objets "vide" dans le sac pour un coût total de 10.
+    - :code:`AddStuff(client, "TV", 200);` ajoute au sac de Maximus l'objet "TV". Il y a donc 1 "teddy bear", une "TV" et 8 objets "vide" dans le sac pour un coût total de 210.
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Client
+network_grading: false
+problems:
+    addstuff:
+        type: code
+        name: Add stuff
+        header: |4-
+                .. code-block:: c
+
+                    /**
+                    *
+                    * Ajout d'un objet dans le sac du client
+                    *
+                    * Si le prix total des objets du sac dépasse le budget du client, il ne pourra pas acheter l'objet et dans ce cas rien n'est ajouté au sac
+                    * Si le client n'aime pas l'objet proposé, il ne l'achètera pas et dans ce cas rien n'est ajouté au sac
+                    * S'il n'y a plus d'objet "vide" dans le sac (c'est-à-dire qu'il n'y a plus de place), le client ne pourra pas acheter l'objet proposé et dans ce cas rien n'est ajouté au sac
+                    *
+                    * Si le sac du client est vide (total = 0), vous devez initialiser celui-ci avant de rajouter l'objet au sac du client
+                    *
+                    * @param client: le client en question
+                    * @param name: une chaine de caractères représentant le nom de l'objet (le nom est différent de "vide")
+                    * @param price: le prix de l'objet (price >= 0)
+                    * @return:  0 si aucune erreur
+                    *          -1 si client == NULL ou si name == NULL
+                    *          -2 si price > budget
+                    *          -3 si name appartient à client->dontLike
+                    *          -4 si malloc échoue
+                    *          -5 si le sac du client est plein ou si bagSize == 0
+                    */
+                    void AddStuff(consumer_t* client, char* name, unsigned int price);
+        language: c
+        default: ''
+    auxiliary:
+        type: code
+        name: Méthodes auxiliaires
+        header: Ecrivez vos autres fonctions ici
+        language: c
+        optional: 'on'
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

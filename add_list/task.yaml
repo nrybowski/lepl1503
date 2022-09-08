@@ -1,0 +1,64 @@
+accessible: true
+author: Roy Makhlouf Anthony Doeraene
+categories: []
+contact_url: ''
+context: |
+    Vous devez écrire une fonction baptisée addLinkedLists qui retourne une liste chainée correspondant à la somme d'entiers positifs, ceux-ci étant représentés à l'envers dans deux autres listes chainées.
+
+    Ces listes chainées sont représentées par la structure suivante:
+
+        .. code-block:: c
+
+            typedef struct node{
+                int val;
+                struct node *next;
+            } node_t;
+
+    Exemples d'utilisation
+
+    - :code:`addLinkedLists(1->2->3->NULL, 2->3->4->NULL)`, la première liste chainée représente :code:`321` tandis que la deuxième représente le nombre :code:`432`. Si on additionne ces nombres, on obtiens :code:`753`, la fonction doit donc retourner :code:`3->5->7->NULL`
+
+    - :code:`addLinkedLists(9->9->9->NULL, 1->NULL)`, la première liste chainée représente :code:`999` tandis que la deuxième représente le nombre :code:`1`. Si on additionne ces nombres, on obtiens :code:`1000`, la fonction doit donc retourner :code:`0->0->0->1->NULL`
+
+    - :code:`addLinkedLists(5->9->2->NULL, 1->2->2->4->NULL)`, la première liste chainée représente :code:`295` tandis que la deuxième représente le nombre :code:`4221`. Si on additionne ces nombres, on obtiens :code:`4516`, la fonction doit donc retourner  :code:`6->1->5->4->NULL`
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Add lists
+network_grading: false
+problems:
+    add_list:
+        type: code
+        name: Add List
+        header: |-
+            .. code-block:: c
+
+                /*
+                 *@pre head1 != NULL, head2 != NULL.
+                 * head1, head2 sont des listes chainées représentant un nombre entier positif à l'envers sans zéros inutiles. Chaque noeud contient un naturel entre 0 et 9
+                 *@post retourne une liste chainée représentant la somme des nombres dans head1 et head2 (nombre écrits à l'envers) ou NULL en cas d'erreur
+                 */
+                node_t *addLinkedLists(node_t *head1, node_t *head2);
+        language: c
+        default: ''
+    auxiliary:
+        type: code
+        name: Méthodes auxiliaires
+        header: Ecrivez ici vos méthodes auxiliaires
+        language: c
+        optional: 'on'
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

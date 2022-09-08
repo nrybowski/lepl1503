@@ -1,0 +1,75 @@
+accessible: true
+author: Arthur van Stratum
+categories:
+- s2
+- level2
+- category_bit
+contact_url: ''
+context: |-
+    In this exercise, we will work with operation on bits. When we speak about the position of a bit, index 0 corresponds to lowest order bit, 1 to the second-lowest order bit, ...
+
+    In C source code, you can write a number in binary (base 2) by prefixing it via 0b., e.g. 0b11010 = 26.
+
+    This exercise will introduce some non-standard data types which guarantee that the variable has a fixed number of bits. Indeed, on some machines, a *int* could use 2, 4 or 8 bytes. Hence, if we want to perform bitwise operations, we have to know first on how many bits we are working.
+
+    For this, C introduces a new class of variable types :
+
+    - *int8_t* (signed integer of 8 bits)
+    - *uint8_t* (unsigned integer of 8 bits)
+    - *uint16_t* (unsigned integer of 16 bits)
+
+    You can mix *uint* or *int* with bit-lengths 8, 16, 32 and 64). These types are defined in <stdint.h>
+environment_id: cpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '30'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S2] Bitwise operation: setting a bit'
+network_grading: false
+order: 10
+problems:
+    q1:
+        language: c
+        name: ''
+        header: |-
+            Write the body of a function that returns the value of variable *x*, but modified with the bit at position *pos* set to *value*.
+
+            Remember that in C (this is defined in stdbool.h), ``true`` corresponds to integer ``1`` while ``false`` corresponds to integer ``0``.
+
+            Remember than in C, you can create a mask as a binary value and use it with the bitwise ``and`` (``&``) and ``or`` (``|``) operations. For example:
+
+            .. code-block:: c
+
+               uint8_t a=0b00000000;
+               uint8_t b=0b00001000;
+               uint8_t c=0b11111101;
+               uint8_t d=0b11011011;
+               // ~(a) returns 0b11111111
+               // (c&a) returns 0b00000000
+               // (c&b) returns 0b00001000
+               // (a|b) returns 0b00001000
+               // (d&c) returns 0b11011001
+
+
+            .. code-block:: c
+
+                #include <stdint.h>
+                #include <stdbool.h>
+                /*
+                 * @pre 0<= pos < 64
+                 */
+                uint64_t set_bit(uint64_t x, int pos, bool value) {
+        default: ''
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 0.0

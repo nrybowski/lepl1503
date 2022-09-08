@@ -1,0 +1,78 @@
+accessible: true
+author: Anthony Doeraene
+categories: []
+contact_url: ''
+context: |-
+    Dans cet exercice, vous devrez écrire une fonction réalisant le parcours infixe d'un arbre binaire donné par la structure tree_t.
+    Pour rappel, un parcous infixe visite les noeuds dans cet ordre:
+
+    #. Le sous-arbre de gauche
+    #. Le noeud même
+    #. Le sous-arbre de droite
+
+    La strucure tree_t est définie comme suit:
+
+        .. code-block:: c
+
+            typedef struct tree{
+                int value;              // the value at root of this tree
+                int number_elements;    // number of elements in the tree
+                                        // bellow this root (including self)
+                struct tree *left;      // left sub-tree
+                struct tree *right;     // right sub-tree
+            }tree_t;
+
+
+            /**
+            *              1
+            *             / \
+            *            0   2
+            *           /
+            *         -1
+            *
+            * => tree(1).number_elements = 4 because it has 3 childs + himself
+            */
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Inorder Traversal
+network_grading: false
+problems:
+    inorder:
+        type: code
+        name: Inorder traversal
+        header: |-
+            .. code-block:: c
+
+                /**
+                * @brief Travel in a in-order tour the binary tree
+                *
+                * @pre tree : the binary tree to travel
+                * @post int* : an array containing the list of integers according
+                *                 to the in-order tour;
+                *              NULL if the tree is NULL, or if an error occurs
+                */
+                int *in_order(tree_t *tree){
+        language: c
+        default: ''
+    auxiliary:
+        type: code
+        name: Méthodes auxiliaires
+        header: Ecrivez ici vos méthodes auxiliaires
+        language: c
+        optional: 'on'
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

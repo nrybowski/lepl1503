@@ -1,0 +1,64 @@
+accessible: true
+author: Mathieu Van houte Anthony Doeraene
+categories: []
+contact_url: ''
+context: |-
+    Dans cet exercice, vous devez écrire une fonction nommée :code:`findValue`.
+    Celle-ci doit retourner l'entier se trouvant dans le n-ième noeud d'une liste chaînée. Remarquez que l'index de départ de la liste chainée est 1.
+
+    Pour la liste chainée, utilisez la structure suivante :
+
+    .. code-block:: c
+
+        typedef struct node {
+            struct node* next;
+            unsigned int value;
+        } node_t;
+
+    Exemple d'utilisation:
+        Soit la liste chaînée suivante : :code:`11->3->6->2->8`
+
+        - Si :code:`n = 3` alors la fonction doit retourner :code:`6`.
+
+        - Si :code:`n = 6` alors la fonction doit retourner :code:`0`.
+
+        - Si :code:`n <= 0` alors la fonction doit retourner :code:`-1`.
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Find value
+network_grading: false
+problems:
+    find:
+        type: code
+        name: Question
+        header: |-
+            .. code-block:: c
+
+                /*
+                 * Retourne la valeur du n-ième noeud @n d'une liste chaînée dont la tête est @head
+                 *
+                 * @head : la tête de la liste chaînée
+                 * @n : le noeud dont la valeur doit être retournée
+                 *
+                 * @post retourne la valeur du n-ième noeud
+                 *                 et -1 si n <= 0, si la tête de la liste n'est pas valide ou
+                 *                       si n est supérieur à la taille de la liste.
+                 */
+                int findValue(node_t* head, int n);
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

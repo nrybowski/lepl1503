@@ -1,0 +1,72 @@
+accessible: true
+author: Jean-Pierre Sagdic Anthony Doeraene
+categories: []
+contact_url: ''
+context: |-
+    Vous devez écrire une fonction baptisée linked_list_to_matrix qui retourne la matrice
+    de taille n*m (n lignes, m colonnes) à partir des valeurs de la linked list lst. Par exemple,
+    pour la linked list avec les valeurs suivantes : :code:`first -> 1-2-3-4-5-6-7-8-9`
+
+        .. code-block::
+
+            pour n=3, m=3 renvoie : [[1 2 3]
+                                     [4 5 6]
+                                     [7 8 9]]
+
+            pour n=2, m=3 renvoie : [[1 2 3]
+                                     [4 5 6]]
+
+            pour n=3, m=4 renvoie : [[1  2  3  4]
+                                     [5  6  7  8]
+                                     [9 -1 -1 -1]]
+
+    Remarquez que s'il n'y a pas assez de valeurs dans la linked list il faut remplir les emplacements
+    restants de la matrice avec des :code:`-1`.
+
+    Voici les structures de la linked list :
+
+        .. code-block:: c
+
+            typedef struct node{
+                struct node* next;
+                int value;
+            } node_t;
+
+            typedef struct list{
+                struct node* first;
+                int size;
+            } list_t;
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: To the matrix
+network_grading: false
+problems:
+    transform:
+        type: code
+        name: Linked List to Matrix
+        header: |4-
+                .. code-block:: c
+
+                    /*
+                     *@pre lst!=NULL, n>0, m>0
+                     *@post retourne la matrice de taille n*m correspondant à la linked list lst
+                     *      retourne NULL si malloc échoue
+                     */
+                    int** linked_list_to_matrix(list_t *, int, int);
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

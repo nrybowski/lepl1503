@@ -1,0 +1,82 @@
+accessible: true
+author: Lamarana Balde Anthony Doeraene
+categories: []
+contact_url: ''
+context: |-
+    You have to write a function called :code:`push` that add integers to a :code:`Stack` according to the LIFO principle. You have then to code a function which sort the integer :code:`Stack` in ascending order.
+
+    The stack is defined by this structure:
+
+        .. code-block:: c
+
+            struct stack {
+                int data;
+                struct stack* next;
+            };
+
+    Examples of push :
+
+    - :code:`push(s,3)`
+
+    - :code:`push(s,49)`
+
+    - :code:`push(s,-3)`
+
+    After these calls, the stack contains :code:`[-3,49,3]`
+
+    *Hint :  You can implement auxiliary functions (ex : pop, insert, empty, ...) to make the implementation easier.*
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Stack
+network_grading: false
+problems:
+    push:
+        type: code
+        name: Push
+        header: |4-
+                .. code-block:: c
+
+                    /*
+                     *@pre x is an int, s can be NULL
+                     *@post add this item to the stack
+                     *@ret 0 if no error, -1 if malloc fails
+                     */
+                    int push(struct stack** s, int x);
+        language: c
+        default: ''
+    sort:
+        type: code
+        name: Sort
+        header: |4-
+                .. code-block:: c
+
+                    /*
+                     *@pre s==NULL or s!=NULL ,
+                     *@post sort the existing stack in place, does nothing if s==NULL
+                     */
+
+                    void sortStack(struct stack** s)
+        language: ''
+        default: ''
+    auxiliary:
+        type: code
+        name: Fonctions auxiliaires
+        header: Ecrivez ici vos fonctions auxiliaires
+        language: c
+        optional: 'on'
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

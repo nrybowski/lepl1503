@@ -1,0 +1,116 @@
+accessible: true
+author: Victor Rijks Anthony Doeraene
+categories: []
+contact_url: ''
+context: |
+    Pour la prochaine version de Windows, Microsoft voudrait offrir une interface qui permet de facilement connaitre la composition d'un dossier spécifique. Plus particulièrement cette interface informerait l'utilisateur sur la quantité de fichiers de chaque extension et de la taille totale que prennent ces fichiers.
+
+    Vous êtes chargé de développer un prototype de cette fonctionnalité en C. Vous devez programmer une fonction "fileAnalyzer" qui prend en argument un élément de type :code:`struct FilesStream *` et qui renvoie un résumé des fichiers sous le format :code:`struct Output *`.
+    Ces deux structures sont expliquées plus en détails plus bas.
+
+    Votre prototype reçoit les fichiers présents dans un dossier sous forme d'une liste chaînée. Le premier élément est lié au second, le second au troisième, etc. Le dernier élément est reconnaissable car il est lié à :code:`NULL`.
+
+    Vous pouvez vous attendre à une liste chaînée vide ou à l'opposé très grande. Cependant, le nombre d'extensions maximales que vous pouvez trouver dans un dossier est de 10 extensions différentes.
+
+    Comme expliqué précédemment, vous recevez en argument une liste chaînée, chaque node est défini ainsi:
+
+    .. code-block:: c
+
+        struct FilesStream {
+           char *filename;
+           char *extension;
+           int  size;
+           struct FilesStream *next;
+        };
+
+    Votre fonction doit retourner un pointeur vers la première :code:`struct Output`, en tout vous devez avoir 10 :code:`struct Output` qui se suivent dans la mémoire. Une :code:`struct Output` est définie comme telle:
+
+    .. code-block:: c
+
+        struct Output {
+           char *extension;
+           int  number;
+           int  totalSize;
+        };
+
+    Si jamais il y a moins de 10 extensions différents, les :code:`struct Output` non utilisées doivent être initialisées comme tel:
+
+    #. :code:`extension == NULL`
+
+    #. :code:`number== 0`
+
+    #. :code:`totalSize == 0`
+
+    .. warning::
+
+        L'ordre des struct Output doit être le même que l'apparition des extensions dans la liste chaînée (l'extension de la première
+        node doit être la première dans les struct Output).
+
+    Exemples d'utilisation
+
+    - **Avec les 3 fichiers suivant:**
+
+      #. image001.png d'une taille de 1460
+
+      #. Photoshop.exe d'une taille de 76
+
+      #. image002.png d'une taille de 798
+
+     - **La deux premiers "struct Output" contiennent:**
+
+      #.  - extension: png
+
+          - number: 2
+
+          - totalSize: 2258
+
+      #.  - extension: exe
+
+          - number: 1
+
+          - totalSize: 76
+
+     - Les huit prochaines "struct Output" sont toutes comme tel:
+          - extension: NULL
+
+          - number: 0
+
+          - totalSize: 0
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: File Analyzer
+network_grading: false
+problems:
+    file-analyzer:
+        type: code
+        name: Question
+        header: |4-
+                .. code-block:: c
+
+                    /*
+                     *@pre maximum de 10 extensions différentes
+                     *@post retourne l'adresse mémoire de la première structure "Output" suivie des autres structures "Output" contenant chacune:
+                     *   1) l'extension (char *)
+                     *   2) le nombre de fichiers ayant cette extension (int)
+                     *   3) la taille totale des fichiers ayant cette extension (int)
+                     * /!\ l'ordre des structures "Output" DOIT être le même que l'ordre d'apparition des extensions dans la liste chainée
+                     * /!\ il doit y avoir 10 structures "Output"
+                     */
+                    struct Output * fileAnalyzer(struct FilesStream *FS){
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

@@ -1,34 +1,20 @@
-name: '[LSINF1252] Systèmes informatiques'
 accessible: true
+name: 3. [C] Introduction à la programmation en C
+description: |-
+    Ce cours est un complément au syllabus d'apprentissage de la programmation en langage C sous Unix disponible via:
+
+    https://sites.uclouvain.be/SyllabusC
+
+    et utilisé en 2e bloc de bachelier en sciences informatiques à l'UCLouvain.
+
+    Besoin d'aide ? Rejoignez notre `Slack <https://join.slack.com/t/inginiousorgfr/shared_invite/zt-doup08xg-sWul7KHoljybVuW_gDmw~w>`_
 admins:
-- maxhonneux
-- vanstratum
-- martinol
-- nrybowski
-- mawait
-- pgonzalezalv
-- rousseauxt
+- Aperence
+- NicolasRybowski
+- louisna
+- michelfra
 - obonaventure
-- gegoa
-- jadinm
-- qdeconinck
-- rousseauxt
-- tascongutier
-- jvlaeminck
-- silardinois
-- louisna
-- agobeaux
-tutors:
-- aballet
-- ody
-- dimidschstei
-- aclarembeau
-- rousseauxt
-- tascongutier
-- jvlaeminck
-- silardinois
-- louisna
-- agobeaux
+tutors: []
 groups_student_choice: true
 use_classrooms: true
 allow_unregister: true
@@ -36,9 +22,379 @@ allow_preview: true
 registration: true
 registration_password: null
 registration_ac: null
-registration_ac_list:
-- ''
+registration_ac_list: []
 is_lti: false
 lti_keys: {}
 lti_send_back_grade: false
-description: ''
+tags:
+    category_bit:
+        description: Task about bitwise operations
+        type: 2
+        name: Bitwise operation
+        visible: true
+        id: category_bit
+    category_file:
+        description: Task about files
+        type: 2
+        name: Files
+        visible: true
+        id: category_file
+    category_free:
+        name: Free
+        description: Task about free
+        type: 2
+        visible: true
+        id: category_free
+    level1:
+        name: Level 1
+        description: Level 1
+        visible: true
+        type: 2
+        id: level1
+    level2:
+        name: Level 2
+        description: Level 2
+        type: 2
+        visible: true
+        id: level2
+    level3:
+        name: Level 3
+        description: Level 3
+        type: 2
+        visible: true
+        id: level3
+    level4:
+        visible: true
+        description: Level 4
+        name: Level 4
+        type: 2
+        id: level4
+    category_linked_list:
+        description: Task about linked lists and their use
+        type: 2
+        name: Linked list
+        visible: true
+        id: category_linked_list
+    category_malloc:
+        name: Malloc
+        type: 2
+        description: Task about malloc
+        visible: true
+        id: category_malloc
+    category_mmap:
+        name: Mmap
+        description: Task about mmap, munmap and msync
+        type: 2
+        visible: true
+        id: category_mmap
+    category_pointer:
+        name: Pointer
+        description: Task about pointers and their use
+        type: 2
+        visible: true
+        id: category_pointer
+    s1:
+        visible: true
+        name: S1
+        type: 2
+        description: ''
+        id: s1
+    s2:
+        description: ''
+        type: 2
+        visible: true
+        name: S2
+        id: s2
+    s3:
+        visible: true
+        type: 2
+        name: S3
+        description: ''
+        id: s3
+    s4:
+        type: 2
+        description: ''
+        visible: true
+        name: S4
+        id: s4
+    s5:
+        name: S5
+        type: 2
+        description: ''
+        visible: true
+        id: s5
+    s6:
+        visible: true
+        name: S6
+        type: 2
+        description: ''
+        id: s6
+    category_string:
+        name: String
+        description: Task about string operations
+        type: 2
+        visible: true
+        id: category_string
+    category_struct:
+        visible: true
+        name: Struct
+        description: Task about structures and their use
+        type: 2
+        id: category_struct
+    category_thread:
+        visible: true
+        name: Threads
+        description: Task about threads
+        type: 2
+        id: category_thread
+    SCRIPT_ERROR:
+        id: SCRIPT_ERROR
+        description: SCRIPT_ERROR - This tag should not appear. If it appears this
+            is probably an error in the test suite of this task.
+        type: 1
+        name: SCRIPT ERROR
+        visible: false
+    bad_next_pointer:
+        name: Bad next pointer
+        description: The 'next' pointer is not correctly initialised
+        id: bad_next_pointer
+        type: 1
+        visible: false
+    bad_node_value:
+        type: 1
+        id: bad_node_value
+        description: The value of the node is not the expected one.
+        name: Bad node value
+        visible: false
+    banned_funcs:
+        description: Your code used some banned functions.
+        id: banned_funcs
+        type: 1
+        name: Banned functions
+        visible: true
+    cppcheck:
+        name: Cppcheck fails
+        type: 1
+        visible: true
+        id: cppcheck
+        description: Your code does not compile with cppcheck.
+    double_free:
+        description: Your code produced a double free.
+        visible: true
+        id: double_free
+        type: 1
+        name: Double free
+    error_normal_case:
+        name: Error normal case
+        type: 1
+        id: error_normal_case
+        description: Your function returns an error in normal case.
+        visible: false
+    failure_handling:
+        name: Failure handling
+        type: 1
+        id: failure_handling
+        description: You do not manage failures properly when a system call fails.
+        visible: false
+    malloc_fail_handling:
+        type: 1
+        id: malloc_fail_handling
+        name: Malloc fail handling
+        description: Wrong return value when malloc call fails.
+        visible: false
+    memory:
+        id: memory
+        type: 1
+        description: Your code exceeded the memory.
+        name: Memory Exceeded
+        visible: true
+    modif_list_malloc_fail:
+        type: 1
+        description: The list was modified while the malloc() fails.
+        name: Modif list malloc fail
+        id: modif_list_malloc_fail
+        visible: false
+    modif_memory_malloc_fail:
+        id: modif_memory_malloc_fail
+        name: Modif memory malloc fail
+        type: 1
+        description: Memory was allocated while the malloc() fails.
+        visible: false
+    not_allocated:
+        id: not_allocated
+        name: Not allocated
+        description: A new node is not allocated with malloc().
+        type: 1
+        visible: false
+    not_compile:
+        id: not_compile
+        description: Your code does not compile.
+        type: 1
+        visible: true
+        name: Not compile
+    not_expected_list:
+        name: Incorrect list
+        description: The linked list does not correspond to the waited one.
+        id: not_expected_list
+        type: 1
+        visible: false
+    not_malloc_once:
+        name: Not malloc once
+        type: 1
+        id: not_malloc_once
+        description: The malloc() functions was not called exactly once.
+        visible: false
+    q1:
+        name: Q1
+        type: 0
+        description: q1 is correct
+        id: q1
+        visible: false
+    q2:
+        type: 0
+        id: q2
+        description: q2 is correct
+        name: Q2
+        visible: false
+    q3:
+        type: 0
+        description: q3 is correct
+        name: Q3
+        id: q3
+        visible: false
+    q4:
+        id: q4
+        type: 0
+        name: Q4
+        description: q4 is correct
+        visible: false
+    q5:
+        id: q5
+        type: 0
+        name: Q5
+        description: q5 is correct
+        visible: false
+    sigfpe:
+        visible: true
+        id: sigfpe
+        type: 1
+        name: Floating Point Exception
+        description: Your code produced a floating point exception.
+    sigsegv:
+        id: sigsegv
+        type: 1
+        visible: true
+        name: Segmentation Fault
+        description: Your code produced a segmentation fault.
+    timeout:
+        description: Your code exceeded the maximum allowed time.
+        id: timeout
+        name: Timeout
+        visible: true
+        type: 1
+    wrong_alloc_size:
+        id: wrong_alloc_size
+        description: The allocated memory doesn't have the correct size.
+        type: 1
+        name: Wrong allocation size
+        visible: false
+    wrong_args_handling:
+        name: Bad Args handling
+        type: 1
+        id: wrong_args_handling
+        description: Wrong return value when wrong args.
+        visible: false
+    wrong_list_size:
+        description: The list has not the expected size.
+        id: wrong_list_size
+        type: 1
+        name: Wrong list size
+        visible: false
+lti_url: ''
+task_dispenser: toc
+dispenser_data:
+-   config:
+        closed: false
+    id: tasks-list
+    rank: 0
+    tasks_list:
+        Test-ssh: 44
+        s1_absolute_value: 0
+        s1_factorial: 1
+        s1_tab_find: 2
+        s2_bits_leftmost: 8
+        s2_bits_rightmost: 9
+        s2_bits_set: 10
+        s2_bits_spin: 11
+        s2_bits_strong: 13
+        s2_bits_sum: 12
+        s2_main_argc: 14
+        s2_palindrome: 7
+        s2_printf: 3
+        s2_strcasecmp: 6
+        s2_strcat: 4
+        s2_strlen: 5
+        s2_swap: 16
+        s2_swap2int: 15
+        s3_BST: 24
+        s3_basic_linked_list: 23
+        s3_calloc2: 21
+        s3_commandetest: 25
+        s3_count_zero: 26
+        s3_modem_read: 27
+        s3_multi-free: 28
+        s3_pointer_types: 20
+        s3_sleep_malloc: 22
+        s3_stack_vs_heap: 17
+        s3_strcpy: 19
+        s3_struct_cmp: 29
+        s3_types: 18
+        s4_advanced_queue: 33
+        s4_cmp_func: 31
+        s4_linked_structs: 32
+        s4_order_relation_linked_list: 34
+        s4_simple_stack: 30
+        s5_big_array_get_set: 38
+        s5_file_copy: 39
+        s5_file_exists: 35
+        s5_file_save_struct: 36
+        s5_read_file_array_integer: 37
+        s6_do_my_work: 42
+        s6_protect_variable: 41
+        s6_shared_ressource: 43
+        s6_sort_my_points: 40
+    title: List of exercises
+-   config:
+        closed: false
+    id: proposition_question
+    rank: 1
+    tasks_list:
+        Bataille: 4
+        Binary_search_tree: 5
+        add_list: 22
+        clean_my_struct: 20
+        consumer: 17
+        delete_ll: 11
+        family_tree: 13
+        file_analyzer: 24
+        filter_circular_ll: 2
+        find_value: 26
+        inorder: 0
+        insert: 15
+        list_isEqual: 3
+        map_ll: 9
+        matrix: 16
+        message_decode: 23
+        number_files: 10
+        post_office: 6
+        question_sinfpion: 14
+        reverse: 19
+        rotate_array: 25
+        shop: 12
+        stack: 18
+        streams: 7
+        student_ranking: 1
+        student_search: 8
+        vinyls: 21
+    title: Proposition Question
+registration_ac_accept: true

@@ -1,0 +1,74 @@
+accessible: true
+author: Olivier Martin, Cyril Pletinckx, Minh-Phuong Tran
+categories:
+- s5
+- category_mmap
+- category_file
+- level4
+contact_url: ''
+context: |-
+    *Estimated time: 25 minutes*
+
+    You are currently processing an array composed of ``struct point`` defined below. In this programme, you need to store the content of the entire array in a file to be able to reuse it later. Write a C function to write the array composed of ``struct point`` into a file. The file may already exist or not. After the execution of the function, the file should only contain the array. If the file has to be created, the user who created it must have the permission to read it.
+
+    .. code-block:: c
+
+        typedef struct point {
+            int x;
+            int y;
+            int z;
+        } point_t;
+
+    Use only ``open(2)``, ``close(2)``, ``mmap(2)``, ``munmap(2)``, ``msync(2)``, ``memcpy(3)`` and ``ftruncate(3)``. You can only call ``memcpy(3)`` once.
+
+    **Hint** : read carefully the man page of `open(2) <https://sites.uclouvain.be/SystInfo/manpages/man2/open.2.html>`_ to manage all the  cases mentionned above. Be sure to open the file with the appropriate rights.
+
+    **Hint** : `msync(2) <https://sites.uclouvain.be/SystInfo/manpages/man2/msync.2.html>`_ is a function that ensures that your modifications done in memory (so in the address returned by mmap) will also be saved in the file. Check the documentation to learn how to use it (pay attention to the flags). Call it before munmap() (or your modifications to the memory may be lost) !
+
+    **Hint** : The function `ftruncate(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/ftruncate.3posix.html>`_ is a function that you won't need to use frequently. However, this function is mandatory to pass this exercice ! In your code, you have to use it to extend the size of the file you opened. When you'll call open (with the appropriate flags to meet the requirements above), the size of the file will be set to zero. So, in order for the mmap function to work, you'll need to extend its size to the one you want by calling ftruncate. Read the documentation linked and use this trick BEFORE calling mmap !
+environment_id: cpp
+environment_parameters:
+    limits:
+        hard_time: ''
+        time: '30'
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S5] Save struct into file'
+network_grading: false
+order: 36
+problems:
+    q1:
+        header: |-
+            .. code-block:: c
+
+                /*
+                 * @pre pt != NULL, pointer to the first point_t in the array
+                 *      size > 0, the length of the array.
+                 *      filename != NULL
+                 * @post writes the array of point_t in the file.
+                 *       return 0 is everything worked correctly
+                 *       -1 if open() failed.
+                 *       -2 if close() failed.
+                 *       -3 if mmap() failed.
+                 *       -4 if munmap() failed.
+                 *       -5 if msync() failed.
+                 *       -6 if ftruncate() failed.
+                 *
+                 */
+                int save(point_t *pt, int size, char *filename) {
+
+            **Hint** : size is the length of the array but not the total number of bytes of what you want to save into your file (because point_t structures doesn't have a size of one byte). To know the total size of your array (in terms of bytes used), you'll need the function sizeof() !
+        name: ''
+        type: code
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

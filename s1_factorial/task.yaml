@@ -1,0 +1,38 @@
+accessible: true
+author: Mathieu Xhonneux
+categories:
+- level1
+- s1
+contact_url: ''
+context: The factorial of an integer *n!* is defined as ``n! = 1*2*3*...*(n-1)*n``,
+    with *0! = 1*.
+environment_id: cpp
+environment_parameters:
+    limits:
+        hard_time: ''
+        time: '30'
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S1] Factorial'
+network_grading: false
+order: 1
+problems:
+    facto:
+        type: code
+        default: ''
+        header: |-
+            Write your own function ``factorial`` which takes as parameter an integer and returns an integer value. Your function must be named ``factorial``.
+
+            Provide below the prototype and the body of this function.
+        language: c
+        name: Factorial
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

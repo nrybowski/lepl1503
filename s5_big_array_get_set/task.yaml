@@ -1,30 +1,26 @@
 accessible: true
-author: Olivier Martin
+author: Olivier Martin, Cyril Pletinckx, Minh-Phuong Tran
 context: |-
     *Estimated time: 30 minutes*
 
-    Given a file containing a large array of integers, you have to write a function to edit the element at a given index the array and another function to retrieve a specific element from this array.
+    Given a file containing a large array of integers, you have to write a function to edit the element at a given index in the array and another function to retrieve a specific element from this array.
 
-    Since the array is huge, you cannot load it completely in memory. Consequently, you have to naviguate directly through the array in the file by using ``lseek(2)``.
+    Use only ``open(2)``, ``mmap(2)``, ``munmap(2)``, ``msync(2)``, ``fstat(2)`` and ``close(2)``.
 
-    You may want to use ``fstat(2)`` to obtain informations about a given file.
-
-    Use only ``open(2)``, ``read(2)``, ``write(2)``, ``close(2)`` and ``lseek(2)``.
+    **Hint** : `msync(2) <https://sites.uclouvain.be/SystInfo/manpages/man2/msync.2.html>`_ is a function that ensures that your modifications done in memory (so in the address returned by mmap) will also be saved in the file. Check the documentation to learn how to use it (pay attention to the flags). Call it before munmap() (or your modifications to the memory may be lost) !
 environment: cpp
 evaluate: best
 groups: false
 input_random: '0'
 limits:
-    memory: '50'
     time: '30'
+    memory: '50'
     output: '2'
 name: '[S5] Get and set on array stored in binary file '
 network_grading: false
-order: 54
+order: 38
 problems:
     q1:
-        type: code
-        name: Retrieve the element at a given index
         header: |-
             .. code-block:: c
 
@@ -36,9 +32,12 @@ problems:
                  *       return -2 if index >= length of array.
                  */
                 int get(char *filename, int index) {
-        default: ''
+        name: Retrieve the element at a given index
         language: c
+        default: ''
+        type: code
     q2:
+        name: Change the value at a given index
         type: code
         language: c
         header: |-
@@ -52,118 +51,13 @@ problems:
                  */
                 void set(char *filename, int index, int value) {
         default: ''
-        name: Change the value at a given index
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags:
-    '0':
-        visible: true
-        type: 0
-        description: This tag validate that your close are correctly performed.
-        name: Close
-        id: close
-    '1':
-        type: 0
-        name: Open
-        visible: true
-        id: open
-        description: This tag validate you are able to open a file.
-    '10':
-        visible: true
-        id: sigfpe
-        name: Floating Point Exception
-        description: ''
-        type: 1
-    '11':
-        visible: true
-        description: ''
-        name: Memory Exceeded
-        id: memory
-        type: 1
-    '12':
-        description: You code do not compile.
-        visible: true
-        id: not_compile
-        type: 1
-        name: Not compile
-    '13':
-        id: original_modif
-        type: 1
-        name: Original file modified
-        description: You have modified the original file.
-        visible: true
-    '14':
-        id: wrong_set_value
-        description: The value written in the file has not the correct value.
-        name: Wrong Set Value
-        type: 1
-        visible: true
-    '15':
-        visible: true
-        description: A value at an unwanted index was modified.
-        type: 1
-        id: wrong_index_set
-        name: Wrong Index Set
-    '2':
-        id: wrong_get_value_returned
-        visible: true
-        type: 1
-        name: Wrong Get Value Returned
-        description: The get() function did not return the expected value.
-    '3':
-        type: 1
-        visible: true
-        description: Your code exceeds the maximum allowed time.
-        name: Timeout
-        id: timeout
-    '4':
-        description: You try to read outside of the array.
-        name: Out of bounds
-        id: oob
-        visible: true
-        type: 1
-    '5':
-        id: too_many_op
-        name: Too many read/write
-        description: You call the read or write function more than necessary.
-        visible: true
-        type: 1
-    '6':
-        name: Segmentation Fault
-        id: sigsegv
-        description: ''
-        type: 1
-        visible: true
-    '7':
-        id: banned_funcs
-        type: 1
-        name: Banned functions
-        visible: true
-        description: You use some banned functions.
-    '8':
-        name: Double free
-        type: 1
-        id: double_free
-        description: Your code produced a double free.
-        visible: true
-    '9':
-        id: failure_handling
-        type: 1
-        description: You do not manage failures properly.
-        name: Failure handling
-        visible: true
-    '16':
-        description: ''
-        visible: true
-        name: File
-        type: 2
-        id: ''
-    '17':
-        description: ''
-        name: S5
-        visible: true
-        type: 2
-        id: ''
 weight: 1.0
+categories:
+- s5
+- level4
+- category_mmap
+- category_file

@@ -1,0 +1,80 @@
+accessible: true
+author: Cyrille Dubois Anthony Doeraene
+categories: []
+contact_url: ''
+context: |-
+    Soit des articles représentés par la structure product définie comme suit:
+
+        .. code-block:: c
+
+            typedef struct product{
+                char* name;
+                double price;
+            } product_t;
+
+    Ces articles sont stockés dans une linked list implémentée comme suit:
+
+        .. code-block:: c
+
+            typedef struct node{
+                product_t product;
+                struct node* next;
+            };
+
+    Ecrivez le prototype et le corps d'une fonction map qui applique une fonction reçue en argument à chaque élément d'une linked list.
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Map my Linked List
+network_grading: false
+problems:
+    prototype:
+        type: code
+        name: Déclaration de la fonction
+        header: |-
+            Ecrivez la déclaration de la fonction map
+
+                .. code-block:: c
+
+                        /*
+                        *@pre mapping_function: fonction à appliquer sur chaque élément de la liste. Elle renvoie 1 si une erreur se produit et 0 sinon.
+                        *                       Cette fonction est passée par pointeur (!= NULL) et est de la forme int mapping_function(product_t*).
+                        *@pre head: pointeur vers le début d'une linked list. Si head == NULL, il n'y a rien besoin de faire.
+                        *@post int: retourne
+                        *           0 si aucune erreur
+                        *           1 si la fonction à appliquer a eu une erreur
+                        */
+        language: ''
+        default: ''
+    map:
+        type: code
+        name: Map
+        header: |-
+            Implémentez désormais cette fonction map
+
+                .. code-block:: c
+
+                    /*
+                    *@pre mapping_function: fonction à appliquer sur chaque élément de la liste. Elle renvoie 1 si une erreur se produit et 0 sinon.
+                    *                       Cette fonction est passée par pointeur (!= NULL) et est de la forme int mapping_function(product_t*).
+                    *@pre head: pointeur vers le début d'une linked list. Si head == NULL, il n'y a rien besoin de faire.
+                    *@post int: retourne
+                    *           0 si aucune erreur
+                    *           1 si la fonction à appliquer a eu une erreur
+                    */
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

@@ -1,0 +1,68 @@
+accessible: true
+author: Léa Ninite \\ Anthony Doeraene
+categories: []
+contact_url: ''
+context: |-
+    Cet exercice se base sur un arbre généalogique. On donne deux structures : :code:`person_t` et :code:`family_tree_t` :
+
+        .. code-block:: c
+
+            typedef struct person {
+                char *surname;
+                struct person *children;
+                int n_children;
+            } person_t;
+
+            typedef struct family_tree {
+                person_t *grand_father;
+                person_t *grand_mother;
+            } family_tree_t;
+
+    La structure person_t est caractérisée par le prénom de la personne, un pointeur vers des structures de type :code:`person_t` correspondant à ses enfants et enfin, par le nombre d'enfants qu'a la personne.
+    La structure :code:`family_tree_t` représente un arbre généalogique de façon plus simple qu'un arbre généalogique classique. On a uniquement trois générations : le grand-père et la grand-mère, leurs enfants (sans représenter leur conjoint(e)) et leurs petits-enfants.
+
+    Vous devez implémenter la fonction :code:`get_last_generation` qui retourne un tableau contenant les prénoms des enfants (3ème génération) présents dans cet arbre généalogique, **triés par ordre alphabétique** (vous pouvez utiliser la librairie string.h). Le tableau retourné (pointeur) est passé en argument de la fonction et aura déjà la bonne taille.
+
+    Attention, il se peut que le pointeur tree soit NULL. Dans ce cas, la fonction doit retourner NULL.
+    De plus, s'il n'y a aucun enfant en troisième génération, la fonction doit mettre « Pas d'enfant » dans la zone mémoire allouée au pointeur res. Vous pouvez définir des fonctions intermédiaires.
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Généalogie
+network_grading: false
+problems:
+    get_last_generation:
+        type: code
+        name: Last Generation
+        header: |4-
+                .. code-block:: c
+
+                    /**
+                    * Retourne un tableau contenant les prénoms des personnes en troisième génération, triés dans l'ordre alphabétique
+                    * @param tree: pointeur vers une structure family_tree_t
+                    * @param res: pointeur vers des chaines de caractères, qui va contenir le résultat retourné par la fonction
+                    */
+                    char **get_last_generation(family_tree_t *tree, char **res);
+        language: c
+        default: ''
+    auxiliary:
+        type: code
+        name: Fonctions auxiliaires
+        header: 'Définissez ici vos fonctions auxiliaires:'
+        language: c
+        optional: 'on'
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

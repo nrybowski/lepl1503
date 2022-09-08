@@ -1,0 +1,93 @@
+accessible: true
+author: Mathieu Xhonneux
+categories:
+- s2
+- category_string
+- level1
+contact_url: ''
+context: In this exercise, you will familiarize yourself with the functions `printf(3)
+    <https://sites.uclouvain.be/SystInfo/manpages/man3/printf.3.html>`_ (printing
+    on the standard output) and `sprintf(3) <`printf <https://sites.uclouvain.be/SystInfo/manpages/man3/sprintf.3.html>`_
+    (text formatting). Consult the documentation before coding to learn how to use
+    these functions properly.
+environment_id: cpp
+environment_parameters:
+    limits:
+        hard_time: ''
+        time: '30'
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S2] Printing data'
+network_grading: false
+order: 3
+problems:
+    digit:
+        default: ''
+        language: c
+        header: |-
+            ``printf`` can also print the content of a variable. Write the body of the function *print_digit*.
+
+            .. code-block:: c
+
+                /* print_digit
+                 * @n: an integer
+                 *
+                 * result: print to stdout "The magic number is NUMBER.\n"
+                 */
+                void print_digit(int number) {
+        type: code
+        name: Digital
+    example:
+        type: match
+        header: |
+            ``printf`` is a powerful formatting tool which can handle several data types, and several formatting parameters.
+
+            What would the following call print to *stdout* ?
+
+            .. code-block:: c
+
+                float PI = 3.1415926;
+                printf("pi = %.4f", PI);
+        answer: pi = 3.1416
+        name: Floating away
+    simple:
+        name: Foo
+        type: code
+        header: |-
+            The function `printf <https://sites.uclouvain.be/SystInfo/manpages/man3/printf.3.html>`_ writes data to the standard output stream (*stdout*).
+
+            Write the body of the function *print_foo* which will print "foo\\n" (without the quotes, the symbol '\\n' represents a **line feed**, i.e. the end of a line) to *stdout*.
+
+            .. code-block:: c
+
+                void print_foo() {
+        language: c
+        default: ''
+    sprintf:
+        type: code
+        name: sprintf
+        language: c
+        header: |
+            ``sprintf(2)`` is a variant of ``printf(2)`` which doesn't write to *stdout*, but instead writes to a *buffer*.
+
+            Write the body of the function *format_str*.
+
+            .. code-block:: c
+
+                /* format_str, example:
+                 * format_str(buf, 42, "Olivier", 'B') will write into buf
+                 * the string "Mister Olivier B. has 42 eggs" (no line feed)
+                 * The given buffer is guaranteed to be big enough
+                 */
+                void format_str(char *buffer, unsigned int d, char *name, char initial) {
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

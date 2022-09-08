@@ -1,0 +1,44 @@
+accessible: true
+author: Mathieu Xhonneux & Cyril Pletinckx
+categories:
+- s2
+- level2
+- category_string
+contact_url: ''
+context: La libraire `string(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/string.3.html>`_
+    implémente un grand nombre de fonctions de manipulation des strings qui vous seront
+    utiles lors de différents projets de programmation. Pour cette tâche, nous vous
+    demandons de réimplémenter la fonction `strcasecmp(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strcasecmp.3.html>`_.  N'hésitez
+    pas à consulter la documentation.
+environment_id: cpp
+environment_parameters:
+    limits:
+        hard_time: ''
+        time: '30'
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S2] strcasecmp'
+network_grading: false
+order: 6
+problems:
+    q1:
+        header: |-
+            Write the body of the function *strcasecmp* which returns an integer less than, equal to, or greater than zero if *s1* is found, respectively, to be less than, to match, or be greater than *s2*, **ignoring the cases of the characters**. You don't have access to existing functions so you have to use `this table <https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/ASCII-Table-wide.svg/2000px-ASCII-Table-wide.svg.png>`_.
+
+            .. code-block:: c
+
+                int strcasecmp(const char *s1, const char *s2) {
+        name: ''
+        type: code
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

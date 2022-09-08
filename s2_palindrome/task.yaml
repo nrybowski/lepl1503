@@ -1,0 +1,45 @@
+accessible: true
+author: Arthur van Stratum & Cyril Pletinckx
+categories:
+- category_string
+- s2
+- level3
+contact_url: ''
+context: 'Palindrome are strings of text which read the same backward as forward,
+    i.e. : "racecar", "a man a plan a canal panama" or "kayak".'
+environment_id: cpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '30'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S2] Palindrome'
+network_grading: false
+order: 7
+problems:
+    q1:
+        language: c
+        name: ''
+        header: |-
+            Write the body of the function *pal* which tells if the given string is a palindrome or not. **Ignore spaces:** for example, "kay a k" should be considered a palindrome. An empty string is considered a palindrome. You can use all the functions that are defined in  *string.h*. You can't modify the initial string.
+
+            .. code-block:: c
+
+                #include <string.h>
+                /*
+                * @return: returns true (1) if str is a palindrome, -1 if str is NULL, otherwise false (0).
+                */
+                int pal(char *str) {
+        default: ''
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

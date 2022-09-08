@@ -1,0 +1,48 @@
+accessible: true
+author: Fabien Duchêne & Christoph Paasch
+context: |-
+    Soit la définition de la structure représentant des fractions entières suivante:
+
+    .. code-block:: c
+
+        struct fract_t {
+                int num;
+                int denum;
+        };
+
+    On veut pouvoir swapper (échanger) les valeurs de deux fractions en utilisant la fonction ``void swap(struct fract_t *a, struct fract_t *b)``. Ecrivez le code de cette fonction.
+environment: cpp
+evaluate: best
+groups: false
+input_random: '0'
+limits:
+    time: '30'
+    memory: '128'
+    output: '5210'
+name: '[S2] Echange de valeurs de fractions'
+network_grading: false
+order: 16
+problems:
+    q1:
+        header: |+
+            Complétez ici le code
+
+            .. code-block:: c
+
+                void swap(struct fract_t *a, struct fract_t *b)
+
+        name: ''
+        language: c
+        default: ''
+        type: code
+responseIsHTML: true
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0
+categories:
+- category_pointer
+- category_struct
+- level1
+- s2

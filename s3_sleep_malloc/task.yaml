@@ -1,0 +1,48 @@
+accessible: true
+author: Mathieu Xhonneux & Maxime Mawait
+categories:
+- s3
+- category_malloc
+- level2
+contact_url: ''
+context: |-
+    The `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_ function may fail, for instance if the OS has no free memory remaining. In this case, it may be possible that some other processes free some memory after some time and then we could use it again.
+
+    In our program, instead of reporting an error immediately if no free memory is available, we will wait some time to see if the OS has freed memory for us.
+environment_id: cpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '30'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S3] Sleepy malloc'
+network_grading: false
+order: 22
+problems:
+    sleep_malloc:
+        type: code
+        language: c
+        default: ''
+        name: Sleepy malloc
+        header: |-
+            Write the body of the function ``sleepy_malloc``. Use the function `sleep(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/sleep.3.html>`_.
+
+
+            .. code-block:: c
+
+                /* Wrapper to the malloc system call.
+                 * If malloc fails, sleep for 5 seconds, and then try again.
+                 * If malloc failed 10 times in a row, return NULL.
+                 */
+                void *sleepy_malloc(size_t s) {
+stored_submissions: 0
+submission_limit:
+    amount: 1
+    period: 12
+weight: 1.0

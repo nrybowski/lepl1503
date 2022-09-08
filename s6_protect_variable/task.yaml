@@ -1,0 +1,48 @@
+accessible: true
+author: Cyril Pletinckx
+context: For now, you did exercises that concerned only one thread, i.e. only one
+    unit of computing. Threads are a very powerful tool to compute faster when you
+    have a large amount of calculations to do. In the project, you will work with
+    them and as they are not so easy to use, we propose you doing some exercises to
+    practice with them.
+environment: cpp
+evaluate: best
+groups: false
+input_random: '0'
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[S6] Protect the variable'
+network_grading: false
+order: 41
+problems:
+    q1:
+        header: |-
+            For this first exercise concerning threads, you have to protect one variable from multiple concurrent accesses. You don't have to create the threads, assume they already exist and you must just protect the *nb* calls to the function "inc()" that calls itself a global variable used by many different threads. For this, use the mutex given as argument (you don't have to initialise it). You can then only use these functions : `pthread_mutex_lock(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/pthread_mutex_lock.3posix.html>`_ and `pthread_mutex_unlock(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/pthread_mutex_lock.3posix.html>`_.
+
+            .. code:: c
+
+                /*
+                * Function used to protect a global variable used in the function inc().
+                *
+                * @inc : the function that must be called in critical (= protected) section
+                * @nb : the number of times the function inc() has to be called
+                * @mutex : an initialised mutex that has to be used for the protection
+                *
+                * @return 0 if no error, -1 otherwise
+                */
+                int protect(void inc(void), int nb, pthread_mutex_t* mutex){
+        name: Shared variable
+        language: C
+        default: ''
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0
+categories:
+- s6
+- level2
+- category_thread

@@ -1,0 +1,122 @@
+accessible: true
+author: Alexandre Gobeaux
+categories:
+- s3
+- level2
+- category_malloc
+- category_pointer
+- category_struct
+contact_url: ''
+context: |-
+    Here you will be playing with structures and pointers to structures so that you can understand better how to use one instead of another. You'll have to return the attributes of both and you'll have to compare them.
+
+    .. code-block:: c
+
+        typedef struct product {
+            char *name;
+            double price;
+        } product_t;
+
+    *Hints :*
+
+    - ``char *name`` is a pointer, memory must be allocated by using `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_ to copy the string and return it.
+
+    - Other useful commands: `strcpy(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strcpy.3.html>`_, `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_ and `strcmp(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strcmp.3.html>`_.
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: last
+file: ''
+groups: false
+input_random: '0'
+name: '[S3] Structures and pointers to structures'
+network_grading: false
+order: 29
+problems:
+    getPtrPrice:
+        default: ''
+        type: code
+        language: c
+        header: |-
+            Write the body of the ``getPtrPrice`` function.
+
+            .. code-block:: c
+
+                /*
+                 * @ptrProd != NULL
+                 * @return: the price of the product ptrProd
+                 */
+                double getPtrPrice(product_t *ptrProd);
+        name: Get Price (pointer to the structure)
+    getPrice:
+        header: |-
+            Write the body of the ``getPrice`` function.
+
+            .. code-block:: c
+
+                /*
+                 * @return: the price of the product prod
+                 */
+                double getPrice(product_t prod);
+        type: code
+        language: c
+        default: ''
+        name: Get Price
+    getPtrName:
+        type: code
+        default: ''
+        header: |-
+            Write the body of the ``getPtrName`` function.
+
+            .. code-block:: c
+
+                /*
+                 * ptrProd != NULL
+                 * @name in ptrProd != NULL
+                 * @return: a string on the heap that contains the name of the product ptrProd or NULL if an error happens
+                 */
+                char* getPtrName(product_t *ptrProd);
+        name: Get Name (pointer to the structure)
+        language: c
+    getName:
+        name: Get Name
+        header: |-
+            Write the body of the ``getName`` function.
+
+            .. code-block:: c
+
+                /*
+                 * @name in prod != NULL
+                 * @return: a string on the heap that contains the name of the product ptrProd or NULL if an error happens
+                 */
+                char* getName(product_t prod);
+        default: ''
+        type: code
+        language: c
+    prodEquals:
+        language: c
+        type: code
+        default: ''
+        header: |-
+            Write the body of the ``prodEquals`` function.
+
+            .. code-block:: c
+
+                /*
+                 * @ptrProd != NULL
+                 * @name in ptrProd != NULL
+                 * @name in prod != NULL
+                 * @return: 1 if the two products are the same, i.e., they have the same price and the same name
+                 */
+                int prodEquals(product_t *ptrProd, product_t prod);
+        name: Product Equals
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

@@ -1,12 +1,14 @@
 #!/bin/python3
 
 # Script d'interface entre INGInious et des tests unitaires écrits à l'aide de CUnit
-# Auteurs : Mathieu Xhonneux, Anthony Gégo
+# Auteurs : Mathieu Xhonneux, Anthony Gégo, Cyril Pletinckx, Minh-Phuong Tran
 # Licence : GPLv3
 
-import subprocess, shlex, re, os, yaml
+import subprocess, shlex, re, os, yaml, sys
 from inginious import feedback, rst, input
 
+sys.path.append('../../course/common/student/Lizard')
+import lizard
 # Switch working directory to student/
 os.chdir("student")
 
@@ -24,8 +26,18 @@ if p.returncode:
     feedback.set_global_feedback(rst.get_codeblock('', make_output), True)
     exit(0)
 else:
-    feedback.set_global_result("success")
-    feedback.set_global_feedback("- Votre code compile.\n")
+    # Cppcheck
+    p = subprocess.Popen(shlex.split("make check"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    cppcheck_output = p.communicate()[0].decode('utf-8')
+    if p.returncode:
+        feedback.set_tag("cppcheck", True)
+        feedback.set_global_result("failed")
+        feedback.set_global_feedback("La compilation de votre code avec ``cppcheck`` a échoué. Voici le message de sortie de la commande ``make check`` :")
+        feedback.set_global_feedback(rst.get_codeblock('', cppcheck_output), True)
+        exit(0)
+    else:
+        feedback.set_global_result("success")
+        feedback.set_global_feedback("- Votre code compile.\n")
 
 # Parse banned functions
 try:
@@ -44,7 +56,13 @@ if banned_funcs:
             feedback.set_global_feedback("Vous utilisez la fonction {}, qui n'est pas autorisée.".format(func))
             exit(0)
 
-
+# Lizard : Analysis of student code complexity before removing the file (printing is done later)
+stud = lizard.analyze_file("student_code.c")
+sol = lizard.analyze_file("solutions/student_code_sol.c")
+for k in range(len(stud.function_list)):
+	feedback.set_custom_value("nlines_q"+str(k+1), stud.function_list[k].nloc)    
+	feedback.set_custom_value("cc_q"+str(k+1), stud.function_list[k].cyclomatic_complexity)  
+            
 # Remove source files
 subprocess.run("rm -rf *.c *.tpl *.h *.o", shell=True)
 
@@ -52,7 +70,8 @@ LANG = input.get_input('@lang')
 
 # Run the code in a parallel container
 p = subprocess.Popen(shlex.split("run_student --time 20 --hard-time 60 ./tests LANGUAGE={}".format(LANG)), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-p.communicate()
+o, e = p.communicate()
+print(o.decode("utf-8"))
 
 # If run failed, exit with "failed" result
 if p.returncode:
@@ -82,12 +101,40 @@ if p.returncode:
 results_raw = [r.split('#') for r in open('results.txt').read().splitlines()]
 results = [{'pid':r[0], 'code':r[1], 'desc':r[2], 'weight':int(r[3]), 'tags': r[4].split(","), 'info_msgs':r[5:]} for r in results_raw]
 
-
 # Produce feedback
 if all([r['code'] == 'SUCCESS' for r in results]):
     feedback.set_global_feedback("\n- Votre code a passé tous les tests.", True)
 else:
     feedback.set_global_feedback("\n- Il y a des erreurs dans votre solution.", True)
+
+# Lizard : printing the analysis if student code presents higher value than thresholds detailed in the file "lizard.txt", only if the file exists
+# The file "lizard.txt" contains two integers per question and one per line : the first line is the threshold for the cyclomatic complexity of the first question and the second line is the threshold for the number of lines of the first question. Next lines must be in the same order for the other questions. 
+if os.path.exists("../lizard.txt"):
+	with open("../lizard.txt",'r') as file:
+		k = 0
+		for func in stud.function_list:
+			cc_thresh = int(file.readline())
+			nlines_thresh = int(file.readline())
+			if func.cyclomatic_complexity > cc_thresh:
+				feedback.set_global_feedback("\n- Votre fonction semble être très compliquée par rapport à ce qu'il est possible de faire. Votre complexité est de {} alors que celle de la solution est de {}.".format(func.cyclomatic_complexity,sol.function_list[k].cyclomatic_complexity), True)
+			if func.nloc > nlines_thresh:
+				feedback.set_global_feedback("\n- Votre fonction semble être très longue par rapport à ce qu'il est possible de faire. Votre code comprend {} lignes (header inclus) alors que celle de la solution est de {} lignes (header inclus).".format(func.nloc,sol.function_list[k].nloc), True)
+			k += 1
+		file.close()
+        
+
+# CPU : printing the analysis if file exists and setting custome_value
+# The file has to be created in tests.c (with fprintf to write strings that can be read by python)
+# The file must contain one float per line representing the CPU_time used for the question 1,2,3,... (see tests.c of the task "palindrome" for an example)
+i = 1
+if os.path.exists("./cpu.txt"):
+	with open("./cpu.txt", 'r') as stream:
+		for line in stream.readlines():
+			feedback.set_custom_value("cpu_q"+str(i),float(line))
+			i += 1
+		stream.close()
+	# Remove the file after analysis
+	subprocess.run("rm ./cpu.txt", shell=True)
 
 score = 0
 total = 0
@@ -100,11 +147,11 @@ for test in results:
             feedback.set_tag(tag, True)
     if test['code'] == 'SUCCESS':
         score += test['weight']
-        feedback.set_problem_feedback("* {desc}\n\n  => réussi ({weight}/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
+        feedback.set_problem_feedback("* {desc}\n\n  => réussi ({weight}/{weight}) pts\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
                 test['pid'], True)
         tests_result[test['pid']] = True if tests_result.get(test['pid'], True) else False
     else:
-        feedback.set_problem_feedback("* {desc}\n\n  => échoué (0/{weight}) pts)\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
+        feedback.set_problem_feedback("* {desc}\n\n  => échoué (0/{weight}) pts\n\n".format(**test)+("  Info: {}\n\n".format(" — ".join(test['info_msgs'])) if test['info_msgs'] else '\n'),
                 test['pid'], True)
         tests_result[test['pid']] = False
         

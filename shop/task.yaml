@@ -1,0 +1,131 @@
+accessible: true
+author: Adrien Loiseau Anthony Doeraene
+categories: []
+contact_url: ''
+context: |-
+    Votre ami Jef est un étudiant en économie à l'UCL.
+    Ses cours d'économie lui ont donné l'idée de lancer son propre site d'e-commerce.
+    Etant donné qu'il est passioné de livres et de bandes dessinées, il a décidé de commencer par une librairie en ligne,
+    nommée "Amazonia" (j'espère que vous avez saisi la référence :-) ).
+    Malheureusement, il n'est pas très calé en informatique... Mais il a entendu que vous suiviez un cours de programmation en C.
+    Il fait donc appel à vous pour créer sa librairie en ligne.
+
+    Pour ce faire, vous allez représenter la librairie par une liste de produits classés par ordre alphabétique de nom,
+    où chaque produit possède un prix unitaire et est présent (ou non) dans le stock en une certaine quantité.
+
+    Le site en ligne est représenté par la structure chaînée suivante :
+
+        .. code-block:: c
+
+            struct shop {
+                int count_products;             // Le nombre de produits différents que propose le magasin
+                struct product *first_product;  // Un pointeur vers le premier produit
+                double income;                  // Les revenus du magasin
+                double stock_value;             // La valeur du stock du magasin
+            } ;
+
+
+    Un produit de cette structure chaînée est représenté par la structure suivante :
+
+        .. code-block:: c
+
+            struct product {
+                char *name;             // Le nom du produit
+                struct product *next;   // Un pointeur vers le produit suivant
+                double unit_price;      // Le prix unitaire du produit
+                int quantity;           // La quantité de ce produit qu'il reste en stock
+            } ;
+
+
+    Vous devez écrire deux fonctions :
+
+    La première fonction est la fonction **add_product** qui permet d'ajouter un produit au stock de la librairie.
+    Ce produit doit être ajouté de sorte que les produits du stock restent dans l'ordre alphabétique.
+    Si ce produit figure déjà dans liste (on complète le stock de la librairie),
+    il faut uniquement augmenter la quantité de ce produit du stock : un produit ne peut être présent qu'une seule fois dans la liste.
+    (Note : Si un produit existe déjà, on suppose que son prix ne change pas : on peut ignorer le dernier prix passé en argument.)
+
+    La deuxième fonction est la fonction **buy_product** qui simule l'achat d'une certaine quantité d'un produit.
+    Si la quantité demandée est supérieure à la quantité du produit se trouvant dans le stock,
+    aucun exemplaire n'est vendu et la fonction retourne 1.
+    De plus, si le produit demandé n'est pas trouvé dans le stock, aucun exemplaire n'est vendu et on retourne 2.
+    Conseil : pensez déjà au moment où votre site comportera des millions d'articles.
+    Profitez pour cela de l'ordre alaphébtique des produits.
+    Par contre, si le produit se trouve bien dans le stock en une quantité suffisante,
+    on enlève du stock la quantité demandée du produit et on retourne 0.
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '45'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Magasin
+network_grading: false
+problems:
+    add_product:
+        type: code
+        name: Add Product
+        header: |4-
+                .. code-block:: c
+
+                    /**
+                    *
+                    * @pre my_shop != NULL
+                    * @post Le produit a été ajouté dans la liste en respectant l'ordre alphabétique.
+                    * Si le produit y figurait déjà, on modifie uniquement la quantité présente dans le stock de ce produit.
+                    * Le nombre de produits différents présents dans le stock est modifié
+                    * uniquement si le produit ajouté n'y figurait pas encore.
+                    * La valeur du stock est toujours modifiée lorsqu'un produit est ajouté.
+                    *
+                    * @param my_shop: Pointeur vers la structure chaînée du magasin
+                    * @param product_name: Le nom du produit à ajouter dans la liste
+                    * @param unit_price: Le prix (> 0) unitaire du produit
+                    * @param quantity: La quantité (> 0) de ce produit ajoutée au stock
+                    *
+                    * @return:
+                    * - Retourne le nombre de produits différents présents dans le stock du magasin
+                    * - Retourne -1 s'il y a eu une erreur
+                    *
+                    */
+                    int add_product(struct shop *my_shop, char *product_name, double unit_price, int quantity);
+        language: c
+        default: ''
+    buy_product:
+        type: code
+        name: Buy Product
+        header: |4-
+                .. code-block:: c
+
+                    /**
+                    *
+                    * @pre my_shop != NULL
+                    * @post La quantité du produit se trouvant dans le stock est modifiée ssi
+                    * le produit se trouve dans la liste ET qu'il est présent en quantité suffisante
+                    * La valeur du stock et les revenus du magasin sont modifiés uniquement si l'achat a réussi.
+                    * Le nombre de produits différents présents dans le stock n'est jamais modifié
+                    * car un produit restera dans le stock même s'il n'y a plus d'exemplaires de ce produit.
+                    *
+                    * @param my_shop: Pointeur vers la structure chaînée du magasin
+                    * @param product_name: Le nom du produit à acheter
+                    * @param amount: La quantité achetée (> 0) de ce produit
+                    *
+                    * @return:
+                    * - Si l'achat a réussi, la fonction retourne 0.
+                    * - Si le produit se trouve dans la liste mais en quantité insuffisante, la fonction retourne 1
+                    * - Si le produit ne se trouve pas dans la liste, la fonction retourne 2
+                    *
+                    */
+                    int buy_product(struct shop *my_shop, char *product_name, int amount);
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

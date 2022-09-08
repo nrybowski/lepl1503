@@ -1,0 +1,53 @@
+accessible: true
+author: Gregory Detal & Fabien Duchêne
+categories:
+- s3
+- level2
+contact_url: ''
+context: |+
+    La commande `test(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/test.1.html>`_ permet d'évaluer une expression passée en paramètre. Elle retourne:
+
+    - ``0`` si l'expression passée en argument est vraie
+    - ``1`` si l'expression passée en argument est fausse
+
+    **Rem** : N'oubliez pas qu'en C, l'entier qui représente le booléen "faux" est 0 et tous les autres entiers représentent le booléen "vrai". C'est donc l'inverse par rapport à la commande test(1) qui est en fait une fonction bash (shell).
+
+    On vous demande d'écrire un sous-ensemble de la commande `test(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/test.1.html>`_ en C. Les expressions à implémenter sont ``-eq``, ``-ge``, ``-gt``, ``-le``, ``-lt`` et ``-ne``.
+
+    Pour rappel, la commande `test(1) <https://sites.uclouvain.be/SystInfo/manpages/man1/test.1.html>`_ est décrite dans la `page de manuel  <https://sites.uclouvain.be/SystInfo/manpages/man1/test.1.html>`_ qui lui est consacrée.
+
+    Pour répondre à cette question, vous devez structurer votre programme avec des appels de sous-fonctions et donc de ne pas faire toute l'exécution dans la fonction ``main()``.
+
+    **Rem** : Si vous le souhaitez, il existe plusieurs façons pour tester votre code depuis le shell. Une de ces façons est de regarder dans le shell le contenu de la variable ``$?`` après chaque exécution de votre programme. Une autre façon est de profiter de l'instruction conditionnelle ``if-then-else`` du shell.
+
+
+
+environment_id: cpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '30'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S3] Le programme test'
+network_grading: false
+order: 25
+problems:
+    q1:
+        language: c
+        name: ''
+        header: |+
+            Ecrivez ici le code contenu dans votre fichier ``test.c`` qui contient la réponse à l'énoncé.
+
+        default: ''
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: 2
+    period: 12
+weight: 1.0

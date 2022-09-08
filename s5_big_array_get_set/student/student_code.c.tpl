@@ -6,6 +6,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/mman.h>
+#include <signal.h>
+#include <sys/uio.h>
 
 int get(char* filename, int index){
 @    @q1@@

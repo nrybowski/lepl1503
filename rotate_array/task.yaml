@@ -1,0 +1,49 @@
+accessible: true
+author: Mikail Turkoglu Anthony Doeraene
+categories: []
+contact_url: ''
+context: |-
+    Vous devez écrire une fonction baptisée leftNTime qui fait pivoter les éléments d'un tableau vers la gauche un certain nombre de fois,
+    le nombre de pivotage doit être stictement positif dans le cas contraire rien n'est modifié, vous pouvez diviser le problème en deux sous-fonction et utiliser une méthode récursive.
+
+    *N.B.: Nous considérons ici un pivotage cyclique, c'est-à-dire que les éléments se trouvant tout à gauche du tableau et ayant été pivotés se retrouveront à la droite du tableau*
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Rotate array
+network_grading: false
+problems:
+    left_rotate:
+        type: code
+        name: Question
+        header: |-
+            .. code-block:: c
+
+                /*
+                 *@pre array!=NULL, n >0.
+                 *@post fait pivoter les éléments du tableau r fois vers la gauche de manière cyclique.
+                 */
+                void leftNTime(int *array, int r, unsigned int n);
+        language: ''
+        default: ''
+    auxiliary:
+        type: code
+        name: Méthodes auxiliaires
+        header: Ecrivez ici vos méthodes auxiliaires
+        language: c
+        optional: 'on'
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

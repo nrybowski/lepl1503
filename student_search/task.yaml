@@ -1,0 +1,105 @@
+accessible: true
+author: Dorian Schrobiltgen Anthony Doeraene
+categories: []
+contact_url: ''
+context: |-
+    .. role::c(code)
+        :language: c
+
+    Cet exercice est basé sur l'implémentation d'un arbre binaire de recherche qui contient tous les étudiants de l'EPL. Cet arbre est ordonné suivant les noma des étudiants (l'étudiant ayant le plus petit noma se trouve donc le plus à gauche dans l'arbre). Pour chacun des étudiants, l'arbre contient en plus du noma, une donnée (le nom de l'étudiant), et la note obtenue au cours LEPL1503.
+    Cet exercice est composé de deux parties.
+
+    Pour réaliser cet exercice, vous devez utiliser les structures suivantes:
+
+
+        .. code-block:: c
+
+            struct element {
+                struct element* left;
+                struct element* right;
+                int noma;
+                char* name;
+                double grade;
+            };
+
+            struct obtree{
+                struct element* head;
+            };
+
+            struct linked_node{
+                struct linked_node* next;
+                int noma;
+                char* name;
+                double grade;
+            };
+
+            struct linked_list{
+                struct linked_node* first;
+                int nbr_of_element;
+            };
+
+    Dans un premier temps, il vous est demandé d'écrire une fonction baptisée :c:`insert` qui, prenant comme argument un arbre, un noma,
+    un nom :c:`name` et une note :c:`grade`, ajoute l'étudiant(avec les données :c:`name`, :c:`noma` et :c:`grade`) dans l'arbre binaire en respectant l'ordre de ce dernier.
+    Dans le cas où l'étudiant ajouté possède un noma qui se trouve déjà dans l'arbre, il faut mettre à jour les données relatives à ce-dernier (c'est-à-
+    dire modifier le nom **et** la note pour le noma correspondant).
+    Dans le cas où une erreur apparait, retournez :c:`NULL`.
+
+    Ensuite, il vous est demandé d'écrire une fonction baptisée :c:`convert` qui, prenant comme argument la racine d'un
+    arbre (c'est-à-dire l'élément central/le premier élément de l'arbre), convertit l'arbre binaire en une liste chainée n, dont les éléments sont
+    les étudiants de l'arbre, triés par ordre croissant suivant leur noma. Il peut être utile d'implémenter une sous-fonction pour réaliser cette tâche.
+    Le résultat de cette fonction convert est stockée sous la forme d'un paramètre de la fonction (il s'agit du deuxième paramètre), facilitant
+    l'implémentation dans le cas où vous appelez récursivement :c:`convert`.
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Recherche étudiante
+network_grading: false
+problems:
+    insert:
+        type: code
+        name: Insert
+        header: |4-
+              .. code-block:: c
+
+                    /*
+                     *@pre name != NULL, tree != NULL
+                     *@post retourne l'arbre binaire tree auquel a été ajouté l'étudiant dont les informations concernant celui-ci ont été passé en paramètre.
+                     */
+                    struct obtree* insert(struct obtree *tree, int noma, char* name, double grade) {
+        language: c
+        default: ''
+    convert:
+        type: code
+        name: Convert
+        header: |4-
+                .. code-block:: c
+
+                    /*
+                    *@pre n!=NULL
+                    *@post retourne la liste chainée n contenant tous les éléments présent dans l'arbre passé en argument, dont les étudiants sont triés par
+                    ordre croissant suivant leur noma
+                    */
+                    void convert(struct element * head, struct linked_list * n)
+        language: c
+        default: ''
+    auxiliary:
+        type: code
+        name: Méthodes auxiliaires
+        header: Ecrivez ici vos méthodes auxiliares
+        language: c
+        optional: 'on'
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

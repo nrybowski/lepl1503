@@ -1,0 +1,75 @@
+accessible: true
+author: Kilian Verhetsel
+context: |-
+    Le type de la plupart des variables en C est facile à déterminer. Néanmoins, le
+    C contient aussi des types qui diffèrent de façons parfois subtiles.
+
+    **Rem** : N'oubliez pas qu'une déclaration en C se termine toujours par ";".
+environment: cpp
+evaluate: best
+groups: false
+input_random: '0'
+limits:
+    time: '10'
+    memory: '128'
+    output: '5210'
+name: '[S3] Les types (1/2)'
+network_grading: false
+order: 18
+problems:
+    q1:
+        header: Déclarez une variable ``x`` de type ``int``.
+        name: Un entier
+        default: ''
+        type: code_single_line
+    q2:
+        name: Un tableau d’entiers
+        type: code_single_line
+        header: Déclarez la variable ``x`` comme un tableau de 10 ``int``.
+        default: ''
+    q3:
+        header: |-
+            En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur
+            vaut 8, que vaut ``sizeof(x)`` dans la question précédente ?
+        type: code_single_line
+        name: Taille d’un tableau
+        default: ''
+    q4:
+        name: Un pointeur vers un entier
+        default: ''
+        header: Déclarez la variable ``x`` comme un pointeur vers un ``int``.
+        type: code_single_line
+    q5:
+        name: Taille d’un pointeur
+        header: |-
+            En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur
+            vaut 8, que vaut ``sizeof(x)`` sachant que ``x`` a été déclaré comme dans la question précédente ?
+        default: ''
+        type: code_single_line
+    q6:
+        type: code_single_line
+        header: |-
+            Voici le prototype d’une fonction standard.
+
+            .. code-block:: c
+
+              int pipe(int filedes[2]);
+
+            En supposant que ``sizeof(int)`` vaut 2 et que la taille de tout pointeur vaut 8, que vaut ``sizeof(filedes)`` à l’intérieur du corps de la fonction ``pipe`` ?
+        name: Taile d’un tableau passé comme argument
+        default: ''
+    q7:
+        default: ''
+        name: Un tableau d’entiers à 2 dimensions
+        type: code_single_line
+        header: |-
+            Déclarez la variable ``x`` comme un tableau à deux dimensions contenant de ``int`` avec 5
+            colonnes et 8 lignes.
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0
+categories:
+- s3
+- level1

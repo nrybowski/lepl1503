@@ -1,0 +1,40 @@
+accessible: true
+author: ''
+categories:
+- level1
+- s1
+contact_url: https://github.com/obonaventure/LEPL1503/issues/new?assignees=&labels=s1&template=bug_report.md&title=s1_absolute_value
+context: The absolute value of a number is defined as *|n| = n* if *n >= 0*, *|n|
+    = -n* else.
+environment_id: cpp
+environment_parameters:
+    limits:
+        hard_time: ''
+        time: '30'
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S1] Absolute value '
+network_grading: false
+order: 0
+problems:
+    absval:
+        header: |-
+            Write the body of the function *absval* returning the absolute value of *i*.
+
+            .. code-block:: c
+
+                int absval(int i) {
+        language: c
+        type: code
+        name: Absolute value
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

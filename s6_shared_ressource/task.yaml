@@ -1,0 +1,112 @@
+accessible: true
+author: Cyril Pletinckx
+categories:
+- s6
+- level3
+- category_thread
+- category_pointer
+contact_url: ''
+context: |-
+    You now see barely how powerful threads can be (and maybe how difficult they are to use but don't worry, you'll get it by practicing). However, you don't know yet how you can share ressources between many threads. One of the possible ways to do that is to use a shared buffer.
+
+    A shared buffer is an array of a certain length where threads can put or get elements concurrently. For example, you could use threads to compute the average temperatures of each of the oceans and sees around the globe (based on billions of stations for each of them, so it is a really long computation) and ask them to put it in the shared buffer when they are done before continuing on another ocean/see. Concurrently, other threads might get these values in the buffer for other processes (like statistics or comparisons). We call this a `producer-consumer problem <https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem>`_.
+
+    In such a problem, the first amount of threads **produce** values that the second amount of threads **consume**. This might seem simple to you but think about it.
+
+    - Firstly, you have to be sure that the accesses to the buffer are independent (you don't want values to be lost because two threads accessed the buffer simultaneously) and you saw previously that it can be done using mutexes (for example).
+    - Secondly, you have to handle the cases when the buffer is full and one thread wants to put an element in it and when the buffer is empty and one thread wants to get an element out of it.
+    - Thirdly, your threads need to communicate the different parameters of the buffer to the other threads : the number of data stored in it, where they can be found (Is it at the first slot ? The fourth slot ?) and other parameters that might be needed depending on what is in the buffer.
+
+    For your first meeting with shared buffer, we propose you a simpler version of it where only one thread has access to it (the initial thread, so no creation of other threads). You'll have to handle the different cases given above in a different way than when many threads are used (for this case, see the link given above). For this, write theses two functions : put() and get().
+
+    **NB** : in this version of the shared buffer we ask you to implement it as a FIFO buffer (first in first out), in other words when you call get(), it has to take the oldest element in the buffer (and not the newest).
+environment_id: cpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '30'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S6] Shared ressource'
+network_grading: false
+order: 43
+problems:
+    q1:
+        language: C
+        name: Put
+        header: |-
+            You have to implement the function put() that is used to interact with the shared buffer *buf*. The values stored in this buffer are pointers to structures defined as :
+
+            .. code-block:: c
+
+                typedef struct data {
+                    int longitude;
+                    int latitude;
+                    float avg_temp;
+                } data_t;
+
+            .. code:: c
+
+                /*
+                * Function used to put a new value in the shared buffer.
+                *
+                * @buf : the shared buffer to fill in with the adresses pointing to the data_t's
+                * @len : the length of the shared buffer
+                * @first : the pointer to the array index where you can find the first inserted element that's still in the buffer
+                *         (or more exactly the pointer to the first element, **if any**)
+                * @last : the pointer to the array index where you can find the first empty space in the buffer
+                *         (or more exactly the first NULL pointer in the array, **if any**)
+                * @in : the number of data_t* pointers in the buffer
+                * @d : the data_t* that has to be inserted in the buffer
+                *
+                * @return 0 if no error, -1 otherwise
+                */
+                int put(data_t** buf, int len, int* first, int* last, int* in, data_t* d){
+
+            **Attention** : You don't have to use mutexes or threads !
+        default: ''
+        type: code
+    q2:
+        default: ''
+        header: |-
+            You have to implement the function get() that is used to interact with the shared buffer *buf*. The values stored in this buffer are structures defined as :
+
+            .. code-block:: c
+
+                typedef struct data {
+                    int longitude;
+                    int latitude;
+                    float avg_temp;
+                } data_t;
+
+            .. code:: c
+
+                /*
+                * Function used to get a value from the shared buffer.
+                *
+                * @buf : the shared buffer to fill out
+                * @len : the length of the shared buffer
+                * @first : the pointer to the array index where you can find the first element inserted that's still in the buffer
+                *         (or more exactly the pointer to the first element, **if any**)
+                * @last : the pointer to the array index where you can find the first empty space in the buffer
+                *         (or more exactly the first NULL pointer in the array, **if any**)
+                * @in : the number of data_t* pointers in the buffer
+                *
+                * @return the pointer to the element that you get if no error, NULL otherwise
+                */
+                data_t* get(data_t** buf, int len, int* first, int* last, int* in){
+
+            **Attention** : You don't have to use mutexes or threads !
+        type: code
+        language: C
+        name: Get
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

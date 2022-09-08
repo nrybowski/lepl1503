@@ -1,0 +1,49 @@
+accessible: false
+author: Louis Navarre
+categories:
+- s3
+- level2
+- category_string
+contact_url: ''
+context: |-
+    The character '\\0' identifies the end of a string in C. But it can also play the role of a real character.
+
+    In this exercice, write the body of the function ``counting_zero``, which counts the number of occurence of the character '\\0'.
+
+    You cannot use any function from the string library.
+environment_id: cpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '30'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S3] Count the ''\0'''
+network_grading: false
+order: 26
+problems:
+    counting_zero:
+        default: ''
+        name: Compter le nombre de \0
+        language: c
+        type: code
+        header: |-
+            .. code-block:: c
+
+                /*
+                 * @str: the string to be counted
+                 * @length: the length of the string, length > 0
+                 * @return: the number of occurences of '\0'
+                 *         -1 in case of error
+                 */
+                 int counting_zero(char* str, int length){
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 0.0

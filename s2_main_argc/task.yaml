@@ -1,0 +1,51 @@
+accessible: true
+author: Arthur van Stratum
+categories:
+- level1
+- s2
+- category_string
+contact_url: ''
+context: |+
+    When you execute a C program, its function ``main()`` is called with, as parameters, the name of the program and the arguments after the executable's name.
+
+    The signature of the ``main()`` function **must** be the following :
+
+    .. code-block:: c
+
+        int main(int argc, char **argv)
+
+environment_id: cpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '30'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S2] Reading arguments '
+network_grading: false
+order: 14
+problems:
+    q1:
+        language: c
+        name: ''
+        header: |
+            Write a complete C program containing a *main*. Your program should print one argument out of two (starting with the first), and return 0. Each argument shall be separated by a space, and the output shall be terminated by a new line just after the last argument printed (so without any additional space). **Don't forget the required includes for your program.**
+
+            Example :
+
+            .. code-block:: bash
+
+                ./myProg a b c d e f g
+                a c e g
+        default: ''
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

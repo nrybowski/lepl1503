@@ -3,23 +3,23 @@ author: Olivier Martin
 context: |+
     *Estimated time: 10 minutes*
 
-    Using `open(2) <https://sites.uclouvain.be/SystInfo/manpages/man2/open.2.html>`_, determine if a file exists.
+    Using `open(2) <https://sites.uclouvain.be/SystInfo/manpages/man2/open.2.html>`_, determine if a file exists. Read the documentation to know how to do that, especially the parts about the flags you can use.
+
+    **Note** : you can only use open().
 
 environment: cpp
 evaluate: best
 groups: false
+input_random: '0'
 limits:
-    memory: '100'
     time: '30'
+    memory: '100'
     output: '2'
 name: '[S5] File exists '
 network_grading: false
-order: 52
+order: 35
 problems:
     q1:
-        name: File exist
-        language: c
-        type: code
         header: |-
             .. code-block:: c
 
@@ -28,63 +28,16 @@ problems:
                  * @post return 0 if the file {filename} exist. -1 Otherwise.
                  */
                  int file_exists(char *filename)
+        name: File exist
+        language: c
+        default: ''
+        type: code
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags:
-    '0':
-        visible: true
-        name: Banned functions
-        id: banned_funcs
-        description: You use some banned functions.
-        type: 1
-    '1':
-        type: 1
-        visible: true
-        id: double_free
-        name: Double free
-        description: Your code produced a double free.
-    '2':
-        type: 1
-        id: sigfpe
-        name: Floating Point Exception
-        description: ''
-        visible: true
-    '3':
-        visible: true
-        description: ''
-        type: 1
-        id: memory
-        name: Memory Exceeded
-    '4':
-        visible: true
-        type: 1
-        name: Not compile
-        id: not_compile
-        description: You code does not compile.
-    '5':
-        type: 1
-        visible: true
-        description: ''
-        name: Segmentation Fault
-        id: sigsegv
-    '6':
-        name: Timeout
-        description: Your code exceeds the maximum allowed time.
-        id: timeout
-        type: 1
-        visible: true
-    '7':
-        name: S5
-        visible: true
-        type: 2
-        description: ''
-        id: ''
-    '8':
-        visible: true
-        description: ''
-        type: 2
-        name: File
-        id: ''
 weight: 1.0
+categories:
+- s5
+- category_file
+- level2

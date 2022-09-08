@@ -1,0 +1,60 @@
+accessible: true
+author: Dorine Poelaert Anthony Doeraene
+categories: []
+contact_url: ''
+context: |-
+    Vous devez écrire une fonction :code:`addToIndex` qui a pour objectif d'ajouter
+    un élément dans une liste chaînée à un certain index donné. Lorsque vous
+    intercalez un élément au milieu d'une liste déjà existante, l'élément qui
+    était présent à l'index où l'on veut ajouter notre élément sera poussé au
+    suivant.
+
+    Si un élément veut être ajouté à un index supérieur à la taille
+    de la liste, celui-ci sera ajouté en **fin de liste**. Si l'index est négatif,
+    l'élément sera ajouté en **début de liste**.
+
+    Pour se faire, vous disposez d'une
+    structure qui vous est déjà fournie. Les includes nécessaire à la réponse
+    à ce problème vous sont également déjà fournis.
+
+        .. code-block:: c
+
+            typedef struct el{
+                int val;
+                struct el *next;
+            }item;
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Insert
+network_grading: false
+problems:
+    insert:
+        type: code
+        name: Insert
+        header: |4-
+                .. code-block:: c
+
+                    /*
+                     *@pre list : la liste dans laquelle on veut insérer l'élément
+                     *@pre index : l'index auquel on souhaite insérer l'élément
+                     *@pre nouveau : l'élément à insérer
+                     *@post retourne la liste chaînée finale, après insertion de l'élément
+                     */
+                    list addToIndex(item *list, int index, item* nouveau){
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

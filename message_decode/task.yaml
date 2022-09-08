@@ -1,0 +1,59 @@
+accessible: true
+author: Sébastien Quatresooz Anthony Doeraene
+categories: []
+contact_url: ''
+context: |
+    Vous devez écrire une fonction baptisée filter qui retourne le message contenu dans une liste de noeud. Chaque noeud contient un caractère (utile ou non, nous cherchons à composer des mots), vous devez récupérer ces caractères et retourner le message qu'ils forment. On négligera les signes de ponctuation à l'exception de l'espace. Vous ne devez donc conserver que des caractères alphabétiques ainsi que les espaces
+
+        .. code-block:: c
+
+            /**
+            * Structure node
+            *
+            * @next: pointeur vers le noeud suivant de la liste, NULL si c'est le dernier node_t
+            * @value: valeur contenue dans le noeud
+            */
+
+            typedef struct node{
+              struct node* next;
+              char value;
+            } node_t;
+
+    Exemples d'utilisation :
+
+    - liste de noeuds : :code:`{'h', 'e', '\\', 'l', 'l', ';', '&', 'o', ' '}` retourne :code:`"hello "`
+    - liste de noeuds : :code:`NULL` retourne :code:`NULL`
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Decode message
+network_grading: false
+problems:
+    decode:
+        type: code
+        name: Decode
+        header: |4-
+                .. code-block:: c
+
+                    /*
+                     *@pre n peut être égale à NULL
+                     *@pre size_mess est la taille du message non filtré
+                     *@post retourne le message filtré, NULL si la liste est vide ou s'il y a une erreur
+                     */
+                    char* filter(node_t* node, unsigned int size_mess);
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

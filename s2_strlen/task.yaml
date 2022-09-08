@@ -1,0 +1,44 @@
+accessible: true
+author: Mathieu Xhonneux & Cyril Pletinckx
+categories:
+- s2
+- level1
+- category_string
+contact_url: ''
+context: La libraire `string(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/string.3.html>`_
+    implémente un grand nombre de fonctions de manipulation des strings qui vous seront
+    utiles lors de différents projets de programmation. Pour cette tâche, nous vous
+    demandons de réimplémenter la fonction `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_.
+    Don't hesitate to consult its man page.
+environment_id: cpp
+environment_parameters:
+    limits:
+        hard_time: ''
+        time: '30'
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S2] strlen'
+network_grading: false
+order: 5
+problems:
+    q1:
+        header: |-
+            Write the body of the function *strlen* which outputs the length of the string given as argument.
+
+            .. code-block:: c
+
+                size_t strlen(const char* s) {
+        name: strlen
+        type: code
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

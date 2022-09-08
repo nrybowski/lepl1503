@@ -1,0 +1,141 @@
+accessible: true
+author: Liam Dauchat & Doeraene Anthony
+categories: []
+contact_url: ''
+context: |-
+    Vous êtes embauchés par l'epl pour réaliser un programme qui classe les étudiants par notes d'examen afin d'aider les professeurs à choisir leurs nouveaux tuteurs.
+    Vous recevez un fichier qui contient les données suivantes (**dans cet ordre**).
+
+    +---------------------------------+------------------------------------------+-------------------------------+
+    | Donnée                          | Type de donnée                           | Nom imposé pour la structure  |
+    +=================================+==========================================+===============================+
+    | le nombre d'étudiants du cours  | (entier non signé de 4 bytes)            | nb_students                   |
+    +---------------------------------+------------------------------------------+-------------------------------+
+    | le code du cours                | (entier non signé de 2 bytes)            | code                          |
+    +---------------------------------+------------------------------------------+-------------------------------+
+    | la moyenne                      | (entier non signé de 1 byte )            | average_grade                 |
+    +---------------------------------+------------------------------------------+-------------------------------+
+    | la médianne                     | (entier non signé de 1 byte )            | median_grade                  |
+    +---------------------------------+------------------------------------------+-------------------------------+
+    | la note minimale                | (entier non signé de 1 byte )            | max_grade                     |
+    +---------------------------------+------------------------------------------+-------------------------------+
+    | la note maximale                | (entier non signé de 1 byte )            | min_grade                     |
+    +---------------------------------+------------------------------------------+-------------------------------+
+    | la liste des notes              | (liste d'entiers non signés de 1 byte )  |                               |
+    +---------------------------------+------------------------------------------+-------------------------------+
+    | la liste des nomas              | (liste d'entiers non signés de 4 byte )  |                               |
+    +---------------------------------+------------------------------------------+-------------------------------+
+
+    .. role::c(code)
+        :language: c
+
+    *NB : Pour utiliser la fonction qsort_r en local, n'oubliez pas de définir la variable _GNU_SOURCE via le compilateur* :c:`-D_GNU_SOURCE`
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Classement étudiant
+network_grading: false
+problems:
+    file_struct:
+        type: code
+        name: Structure file
+        header: Il vous est demandé de créer compléter la structure `file_t` contenant
+            les 10 premiers bytes du fichier, **veillez à respecter la nomenclature
+            imposée.**
+        language: c
+        default: |-
+            struct file {
+                //your code here
+            }
+    load_header_data:
+        type: code
+        name: Load Header Data
+        header: |+
+            Chargez ensuite en une ligne les données dans la structure file (Il n'est donc pas nécessaire de réaliser des conversion de format binaire à ce stade)
+
+                .. code-block:: c
+
+                    void load_header_data(FILE *input_file, struct file *ptr){
+                      /* @pre  : input_file - un FILE stream que vous ne devez pas fermer
+                                 ptr : un pointeur vers une structure file_t
+                         @post : stocke les 10 premiers bytes du fichier (qu'on suppose correctement agencé)
+                      */
+                        // COMPLETEZ EN UNE LIGNE
+                    }
+
+
+            Afin de vous faire réflechir sur le stockage des données sur le disque, il vous sera imposé de ne faire qu'un **seul appel à la fonction fread pour charger ces données**, agencez donc intelligemment votre structure !
+
+            *Hint : on peut visualiser une structure comme un train avec un ensemble de wagons de différentes taille où chaque wagon (de la tête du train à la fin*
+            *représente les arguments de la structure (du premier au dernier). La fonction fread remplira ces wagons en fonction de leur taille.)*
+
+
+        language: c
+        default: |-
+            void load_header_data(FILE *input_file, struct file *ptr) {
+                // COMPLETEZ EN UNE LIGNE
+            }
+    compare_indexes:
+        type: code
+        name: Comparateur
+        header: |
+            Commencez par écrire le corps de la fonction que vous passerez comme comparateur à la fonction système de tri.
+
+                .. code-block:: c
+
+                    int compare_indexes(const void *first, const void *second, void *ptr) {
+                        return 1;
+                    }
+        language: c
+        default: ''
+    make_ranking:
+        type: code
+        name: Classement
+        header: |-
+            .. role:: c(code)
+                :language: c
+
+            On vous demande maitenant de traiter le reste du fichier.
+            Faites appel à votre fonction load_header_data puis triez les nomas par **ordre descendant** (de celui ayant obtenu la plus haute note à la plus faible)
+
+
+            *Il y a beaucoup de cours à l'epl et vous devrez ultérieurement multi-threader votre programme c'est pourquoi la fonction système que vous choisirez d'utiliser doit être thread-safe ! (qsort_r)*
+
+            Triez les nomas par ordre descendant et écrivez les (toujours sous la forme d'entiers non signés de 4 bytes) dans le fichier de sortie output_file en **big_endian** !
+            Votre fonction devra également retourné les valeures suivantes :
+
+            - Succès de la fonction : 0
+            - Echec de l'ouverture du fichier d'entrée : 1
+            - Echec de malloc : 2
+            - Echec de fermeture du fichier d'entrée : 3
+            - Echec de l'ouverture du fichier de sortie : 4
+            - Echec de fermeture du fichier de sortie : 5
+
+            Veillez à ce que votre programme ferme bien tout les fichiers ouverts et à bien libérer toute la mémoire utilisée ! (Vous pouvez pour ce faire utiliser valgrind)
+            Un fichier python `make_input`_ est mis à votre disposition pour générer des fichiers tests.
+
+            Les fonctions systèmes suivantes pourraients vous aider : :c:`diff(1)`, :c:`fopen(3)`, :c:`fwrite(3)`, :c:`fread(3)`, :c:`fclose(3)`, :c:`malloc()`, :c:`free()`
+            Les fichiers que vous recevrez sont encodés en big-endian, il vous faudra donc uiliser les fonction :c:`be32toh(3)` et d'autres fonctions de la librairie :c:`<stdint.h>`
+
+                .. code-block:: c
+
+                    int make_ranking(char *file_path, char *output_file){
+
+
+            .. _make_input: https://inginious.org/admin/uclouvain-lepl1503/edit/task/student_ranking/files?action=download&path=/student/make_input.py
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

@@ -1,0 +1,48 @@
+accessible: true
+author: Nicolas Rybowski
+context: |-
+    The classic function ``char *strcpy(char *destination, const char *source);`` `strcpy(3) <https://linux.die.net/man/3/strcpy>`_ needs a destination buffer where the source string is copied. We ask you to code a function which allocates a buffer itself, and then performs the copy.
+
+    The use of copy functions as ``memcpy`` or ``strcpy`` is not allowed.
+
+    *Hint* : use `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_. Don't forget that malloc can fail sometimes...
+environment: cpp
+evaluate: best
+groups: false
+input_random: '0'
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[S3] Improved strcpy '
+network_grading: false
+order: 19
+problems:
+    strcpy_impl:
+        language: c
+        header: |
+            Write the body of the function *buf_strcpy*.
+
+            .. code-block:: c
+
+                /*
+                * Creates a buffer that has the same size as src, and copies the content of src to this buffer.
+                *
+                * @src: string to be copied
+                * @return: return pointer. if src == NULL or in case of error, return NULL
+                *
+                * Remember that strings are terminated with '\0' and that strlen("abc") returns 3 even if 4 bytes are required to store this string.
+                */
+                char *buf_strcpy(const char *src) {
+        type: code
+        default: ''
+        name: buf_strcpy
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0
+categories:
+- s3
+- category_malloc
+- level2

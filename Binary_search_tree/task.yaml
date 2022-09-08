@@ -1,0 +1,89 @@
+accessible: true
+author: Jérôme Mayolet Anthony Doeraene
+categories: []
+contact_url: ''
+context: |
+    .. role::c(code)
+        :language: c
+
+    Sur base de la structure :c:`node` décrite ci-dessous :
+
+        .. code-block:: c
+
+            struct node {
+                struct node *left, *right;
+                int value;
+            };
+
+    Voici un exemple d'arbre généré par cette structure:
+
+    .. image:: https://inginious.org/admin/uclouvain-lepl1503/edit/task/Binary_search_tree/files?action=download&path=/student/arbre.JPG
+        :height: 150px
+        :align: center
+
+    Vous devez former un arbre binaire au fur et à mesure des appels à la fonction :c:`add`. La fonction
+    :c:`search` doit quant à elle utiliser efficacement la structure binaire de l’arbre pour y vérifier la présence d’une valeur donnée.
+
+    Nous utiliserons un arbre binaire dans lequel tous les noeuds à droite d’un noeud donné ont leur
+    variable :c:`value` supérieure à celle de ce noeud, et tous les noeuds à gauche leur variable :c:`value` inférieure.
+
+    *Exemple du comportement après add:*
+
+    .. image:: https://inginious.org/admin/uclouvain-lepl1503/edit/task/Binary_search_tree/files?action=download&path=/student/sequence%20ajout.JPG
+        :width: 100%
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Binary Search Tree
+network_grading: false
+problems:
+    add:
+        type: code
+        name: Add
+        header: |-
+            Ecrivez la fonction qui ajoute au bon endroit un élement dans l’arbre
+
+                .. code-block:: c
+
+                    /**
+                    * Cette fonction ajoute un noeud avec la valeur "value" dans l'arbre.
+                    * Si cette valeur existe déjà, l'arbre n'est pas modifié.
+                    *
+                    * @param root le noeud root de l'arbre (peut être NULL)
+                    * @param value créer un noeud avec la valeur "value" et l'ajoute dans l'arbre
+                    * @return le root de l'arbre
+                    */
+                    struct node *add(struct node *root, int value);
+        language: c
+        default: ''
+    search:
+        type: code
+        name: Search
+        header: |
+            Ecrivez la fonction search qui vérifie efficacement la présence d’un élément dans l’arbre.
+
+                .. code-block:: c
+
+                    /**
+                    * Cette fonction vérifie si "value" se trouve dans l'arbre
+                    * @param root le noeud root de l'arbre (peut être NULL)
+                    * @param value la valeur à chercher dans l'arbre
+                    * @return 1 si "value" se trouve dans l'arbre , 0 sinon
+                    */
+                    int search(struct node *root, int value);
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

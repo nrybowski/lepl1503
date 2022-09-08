@@ -1,0 +1,44 @@
+accessible: true
+author: Mathieu Xhonneux & Cyril Pletinckx
+categories:
+- level2
+- s2
+- category_string
+contact_url: ''
+context: La libraire `string(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/string.3.html>`_
+    implémente un grand nombre de fonctions de manipulation des strings qui vous seront
+    utiles lors de différents projets de programmation. Pour cette tâche, nous vous
+    demandons de réimplémenter la fonction `strcat(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strcat.3.html>`_.  Don't
+    hesitate to consult its man page.
+environment_id: cpp
+environment_parameters:
+    limits:
+        hard_time: ''
+        time: '30'
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S2] strcat'
+network_grading: false
+order: 4
+problems:
+    q1:
+        header: |-
+            Write the body of the function *strcat* which concatenates the strings *dest* and *src* in the *dest* pointer ! As the documentation says, you have to overwrite the '\\0' character that terminates the *dest* string and then add a new '\\0' at the end of the concatenated string. In this way, the *src* string will follow the *dest* string but the result will be considered as a unique entire string. You have to return the pointer to the resulting string *dest*.
+
+            .. code-block:: c
+
+                char* strcat(char* dest, const char* src) {
+        name: ''
+        type: code
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

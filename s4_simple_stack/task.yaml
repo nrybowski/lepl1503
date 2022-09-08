@@ -1,0 +1,95 @@
+accessible: true
+author: Maxime Mawait & Nicolas Rybowski
+categories:
+- category_struct
+- s4
+- category_malloc
+- level4
+- category_pointer
+- category_linked_list
+contact_url: ''
+context: |
+    You are asked to implement the ``pop`` and ``push`` functions of the following `stack <https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>`_ interface :
+
+    .. code-block:: c
+
+        struct node {
+            node *next;
+            char *name;
+        };
+
+    .. image:: https://upload.wikimedia.org/wikipedia/commons/b/b4/Lifo_stack.png
+            :align: right
+            :height: 540px
+            :width: 773px
+            :scale: 50%
+
+
+
+    *Hints* :
+
+    - ``char *name`` is also a pointer, memory must be allocated by using `malloc(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/malloc.3.html>`_ to copy the string on the stack.
+
+    - Other useful commands: `strncpy(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strncpy.3.html>`_ and `strlen(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/strlen.3.html>`_.
+
+    - Do not forget to free **all** the allocated space when popping one element.
+environment_id: cpp
+environment_parameters:
+    limits:
+        memory: '100'
+        hard_time: ''
+        time: '30'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: '0'
+name: '[S4] Simple stack '
+network_grading: false
+order: 30
+problems:
+    pop:
+        name: Pop
+        default: ''
+        header: |-
+            .. code-block:: c
+
+                /**
+                * Remove the top element of the stack and return its content.
+                *
+                * @head : pointer to the top of the stack
+                * @result : pointer to store the popped element
+                *
+                * @return 0 if no error, 1 otherwise
+                *
+                * pre : @result contains a null-terminated correct string
+                * post : @result contains the string @name from the element at the top of the stack
+                */
+
+                int pop(struct node **head, char *result){
+        language: c
+        type: code
+    push:
+        language: c
+        header: |-
+            .. code-block:: c
+
+                /**
+                * Add @name at the "top" of the stack.
+                *
+                * @head : pointer to the top of the stack
+                * @name : the string to be placed in the element at the top of the stack
+                *
+                * @return 0 if no error, 1 otherwise
+                */
+
+                int push(struct node **head, const char *value){
+        name: Push
+        type: code
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

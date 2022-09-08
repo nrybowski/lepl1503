@@ -1,28 +1,42 @@
 accessible: true
-author: Olivier Martin
+author: Olivier Martin, Cyril Pletinckx, Minh-Phuong Tran
+categories:
+- s5
+- category_file
+- category_mmap
+- level4
+contact_url: ''
 context: |-
     *Estimated time: 30 minutes*
 
     Given a file containing arbitrary bytes, you must write a function that copies the file. Obviously, your function cannot modify the content of the original file. Beware that the copied file should have the same permissions as the original file.
 
-    Use only ``open(2)``, ``read(2)``, ``write(2)``, ``stat(2)`` and ``close(2)``.
+    Use only ``open(2)``, ``mmap(2)``, ``munmap(2)``, ``msync(2)``, ``ftruncate(3)``, ``fstat(2)``, ``memcpy(3)`` and ``close(2)``. You can call ``memcpy(3)`` only once.
 
-    *Hint: you may need either to go through the file or to get the total size to copy all of it.*
-environment: cpp
+    **Hint** : `msync(2) <https://sites.uclouvain.be/SystInfo/manpages/man2/msync.2.html>`_ is a function that ensures that your modifications done in memory (so in the address returned by mmap) will also be saved in the file. Check the documentation to learn how to use it (pay attention to the flags). Call it before munmap() (or your modifications to the memory may be lost) !
+
+    **Hint** : The function `ftruncate(3) <https://sites.uclouvain.be/SystInfo/manpages/man3/ftruncate.3posix.html>`_ is a function that you won't need to use frequently. However, this function is mandatory to pass this exercice ! In your code, you have to use it to extend the size of the file you opened for copying the original one. When you'll call open (with the appropriate flags to meet the requirements above), the size of the new file freshly created will be set to zero. So, in order for the mmap function to work, you'll need to extend its size to the one you want by calling ftruncate. Read the documentation linked and **use this trick BEFORE calling mmap** !
+
+    **Hint** : Permissions are sometimes hard to deal with. Be aware that, when using mmap with MAP_SHARED and PROT_WRITE, your file descriptor argument must have been opened with the O_RDWR flag. You need to read the file to copy it in memory and you ask to write in this piece of memory (with the PROT_WRITE) so you also need the write permission on the file !
+environment_id: cpp
+environment_parameters:
+    limits:
+        memory: '100'
+        time: '30'
+        hard_time: ''
+    run_cmd: ''
+environment_type: docker
 evaluate: best
+file: ''
 groups: false
 input_random: '0'
-limits:
-    time: '30'
-    memory: '100'
-    output: '2'
 name: '[S5] File copy '
 network_grading: false
-order: 56
+order: 39
 problems:
     q1:
         language: c
-        default: ''
+        type: code
         name: ''
         header: |-
             Write here the body of the function
@@ -37,100 +51,9 @@ problems:
                  *       return 0 if the function terminates with success, -1 in case of errors.
                  */
                 int copy(char *file_name, char *new_file_name) {
-        type: code
+        default: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags:
-    '0':
-        description: This tag validate that your close are correctly performed.
-        name: Close
-        id: close
-        type: 0
-        visible: true
-    '1':
-        type: 0
-        description: This tag validate that you are able to copy permission of a file.
-        id: permission
-        name: Permission
-        visible: true
-    '2':
-        id: copy
-        description: This tag validate you are able to copy a file.
-        name: Copy
-        visible: true
-        type: 0
-    '3':
-        description: This tag validate you are able to open a file.
-        visible: true
-        id: open
-        type: 0
-        name: Open
-    '10':
-        id: timeout
-        name: Timeout
-        type: 1
-        description: Your code exceeds the maximum allowed time.
-        visible: true
-    '11':
-        id: original_modif
-        type: 1
-        visible: true
-        name: Original file modified
-        description: You have modified the original file.
-    '12':
-        description: You do not manage failures during the copy properly.
-        id: failure_handling
-        visible: true
-        name: Failure handling
-        type: 1
-    '4':
-        description: ''
-        name: Floating Point Exception
-        type: 1
-        id: sigfpe
-        visible: true
-    '5':
-        type: 1
-        name: Segmentation Fault
-        description: ''
-        id: sigsegv
-        visible: true
-    '6':
-        description: You use some banned functions.
-        type: 1
-        visible: true
-        id: banned_funcs
-        name: Banned functions
-    '7':
-        type: 1
-        name: Memory Exceeded
-        description: ''
-        id: memory
-        visible: true
-    '8':
-        description: You code does not compile.
-        id: not_compile
-        visible: true
-        type: 1
-        name: Not compile
-    '9':
-        name: Double free
-        id: double_free
-        type: 1
-        visible: true
-        description: Your code produced a double free.
-    '13':
-        visible: true
-        description: ''
-        name: File
-        type: 2
-        id: ''
-    '14':
-        description: ''
-        name: S5
-        visible: true
-        type: 2
-        id: ''
 weight: 1.0

@@ -1,0 +1,75 @@
+accessible: true
+author: Maxime Mawait & Nicolas Rybowski
+context: |
+    For this task, you will implement a simple binary search on an existing binary tree. A binary tree has the following structure:
+
+    .. image:: s3_BST/bst.png
+        :height: 340px
+        :width: 540px
+        :scale: 100%
+
+
+    This binary tree is composed of nodes implemented using the following structure.
+
+    .. code-block:: c
+
+        /*
+        * Node has a value, @value, and two children, @left and @right.
+        * All the children of @left and itself have a smaller value than the node and all the children of @right and itself have a larger value than node
+        */
+        typedef struct node{
+            int value;
+            struct node* left; // to smaller values
+            struct node* right; // to larger values
+        } node_t;
+
+    The binary tree itself is defined as follows.
+
+    .. code-block:: c
+
+        typedef struct bt{
+            struct node* root;
+        } bt_t;
+environment: cpp
+evaluate: best
+groups: false
+input_random: '0'
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: '[S3] Simple Binary Search Tree'
+network_grading: false
+order: 24
+problems:
+    contains:
+        header: |-
+            Write the body of the ``contains`` function. If you use subfunctions, write them in the box below with their signature and body.
+
+            .. code-block:: c
+
+                /*
+                * Return 1 if there is a node containing @value in @tree and 0 otherwise.
+                */
+                int contains(bt_t* tree, int value){
+        type: code
+        default: ''
+        name: Function contains
+        language: c
+    other:
+        name: Helpful submethods
+        default: ''
+        header: Write here the submethods used by the contains method.
+        language: c
+        optional: 'on'
+        type: code
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0
+categories:
+- s3
+- category_linked_list
+- category_struct
+- level3

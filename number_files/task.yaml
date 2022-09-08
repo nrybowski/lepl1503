@@ -1,0 +1,60 @@
+accessible: true
+author: Paulin Eliat-Eliat Anthony Doeraene
+categories: []
+contact_url: ''
+context: |
+    Comme vous le savez déjà peut-être, sous Linux : *"everything is a file"*. En effet, même les dossiers sont en fait aussi des fichiers !
+    Les deux principaux types de fichiers sont les fichiers standards (ou ordinaires) et les répertoires.
+
+    De plus, la structure du système de fichiers de Linux peut-être représenté par un arbre, avec "/" la racine de tous les fichiers.
+
+    Vous devez ici écrire une fonction baptisée :code:`get_number_of_files` qui, sur base d'un fichier donné (un fichier qui peut donc être un dossier),
+    retourne le nombre de fichiers standards contenus dans celui-ci et dans tous ses sous-dossiers.
+    Si le fichier donné en argument est NULL, la fonction doit retourner -1;
+
+    *INDICE : implémenter une version récursive est ici facile et efficace !*
+
+    On considère que les fichiers sont décrits par la structure suivante :
+
+        .. code-block:: c
+
+            typedef struct file
+            {
+                file_t ** files;// liste contenant tous les pointeurs vers les fichiers contenus dans le fichier (si celui-ci est un répertoire)
+                int folder;    // true (=1) si c'est un répertoire, false (=0) sinon
+                int n_files;    // le nombre de fichier (standards et répertoires) contenus dans le fichier, SI celui-ci est un répertoire
+                void * content; // modélise le contenu du fichier (non-utilisé dans cet exercice)
+            } file_t;
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Number of files
+network_grading: false
+problems:
+    number_files:
+        type: code
+        name: Get Number Files
+        header: |4-
+                .. code-block:: c
+
+                    /*
+                     *@pre file est un répertoire
+                     *@post retourne le nombre de fichiers contenus dans 'file'
+                     */
+                    int get_number_of_files (file_t * file){
+        language: ''
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

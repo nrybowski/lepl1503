@@ -1,0 +1,69 @@
+accessible: true
+author: Quentin de Laet Anthony Doeraene
+categories: []
+contact_url: ''
+context: |
+    Your task is to implement a function able to filter out the elements of a circular linked list based on a given predicate function.
+
+    For this exercise, use the following data structures :
+
+        .. code-block:: c
+
+            typedef struct node {
+                struct node* next;
+                int value;
+            } node_t;
+
+            typedef struct circular_linked_list{
+                struct node* tail;
+                int size;
+            } list_t;
+
+    For instance, here's how the function should behave with the following lists :
+
+    .. image:: https://inginious.org/admin/uclouvain-lepl1503/edit/task/filter_circular_ll/files?action=download&path=/student/diagram.png
+
+    *Note : when the tail of the initial list is not kept, the tail of the returned list must be the closest node to the left that
+    has been accepted by the predicate. In the example above, if the node "e" had not been accepted into the returned list, then the
+    new tail would have been the node "c".*
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Filter Circular Linked List
+network_grading: false
+problems:
+    filter:
+        type: code
+        name: Filter
+        header: |-
+            .. code-block:: c
+
+                /**
+                 * Filters out the nodes of a circular linked list based on a predicate.
+                 *
+                 * @param list : the circular linked list to filter
+                 * @param predicate : a function that returns 1 if the node with value "val" must be kept in the filtered list, and 0 otherwise.
+                 *
+                 * @return list_t* : a new circular linked list that contains all the nodes which passed the conditions of the predicate.
+                 * Its tail must be the node that was the closest to the tail of the initial list.
+                 * The nodes of the returned list must be independent from those of the initial one (malloc required).
+                 *
+                 * /!\ If anything goes wrong, return NULL.
+                 */
+                list_t* filter(list_t* list, int (*predicate) (int val)){
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

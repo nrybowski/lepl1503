@@ -1,0 +1,66 @@
+accessible: true
+author: Aurélien Hermant Anthony Doeraene
+categories: []
+contact_url: ''
+context: |-
+    Un disquaire vous contacte car il souhaite automatiser l'envoi de mail de recommandations à ses clients. Pour ce faire, il dispose d'une liste d'artistes (un album par artiste) contenant comme information : le nom de l'artiste, le genre de l'artiste, le prix de l'album ainsi que le nombre d'unités qu'il lui reste en stock. Il dispose également d'informations à propos de ses clients, à savoir, une liste de genre(s) que ce client aime, la taille de cette liste et leur budget.
+
+    Pour contenir ces informations, 3 structures sont nécessaires, une nommée *Artist*, l'autre *Client* et la dernière *Recommendations*. Les deux premières sont décrites dans le texte ci-dessus, tandis que la dernière est la forme de la sortie de la fonction demandée, elle contient une liste de type *Artist* et la taille de cette liste. Ci-dessous les 3 signatures :
+
+        .. code-block:: c
+
+            typedef struct{
+            char* name;
+            char* genre;
+            int price;
+            int stock;
+            } Artist;
+
+            typedef struct{
+            char** genres;
+            int genre_number;
+            int budget;
+            } Client;
+
+            typedef struct{
+            Artist* rec_list;
+            int rec_number;
+            } Recommendations;
+
+     Il vous est demandé d'écrire une fonction baptisée **possible_vinyls**.
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Vinyls
+network_grading: false
+problems:
+    possible_vinyls:
+        type: code
+        name: Possible vinyls
+        header: |4-
+                .. code-block:: c
+
+                    /*
+                    *@pre liste d'artistes : Artist* artists!=NULL, length = a_length!=0
+                    *@pre client : Client client
+                    *@pre a_length
+                    *@post retourne une structure Recommendations contenant la liste d'artistes conforme au client.
+                    *      (cohérent au budget + genre de l'artiste appartient aux genres du client + disponible)
+                    */
+                    Recommendations possible_vinyls(Artist* artists, Client client, int a_length);
+        language: ''
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

@@ -1,0 +1,95 @@
+accessible: true
+author: Hippolyte Hilgers Anthony Doeraene
+categories: []
+contact_url: ''
+context: |-
+    .. role::c(code)
+        :language:c
+
+    In this exercicde, you have to write 2 functions which will simulate the card game `War <https://en.wikipedia.org/wiki/War_(card_game)>`_.
+
+    The hands of the players will be represented by `queues <https://en.wikipedia.org/wiki/Queue>`_ and the definition of the hands is given.
+
+    You can use the following structure in your code:
+
+    .. code-block:: c
+
+        typedef struct card{
+            int value;
+            struct card* next;
+        } card_t;
+
+        typedef struct deck{
+            int id_player;
+            int size;
+            struct card* tail;   // la carte en dessous de son paquet
+            struct card* head;   // la carte tout au dessus de son paquet
+        } deck_t;
+
+    You have access to the following functions too :
+
+        - :c:`int addCard(deck_t* d, int val)` : enqueue the deck : add a card of value val at the bottom of the deck (-1 if an error occurred) (0 otherwise).
+        - :c:`int drawCard(deck_t* d)` : dequeue the deck : draw the card at the top of the deck, removing it from the deck and returning it's value. Return -1 if the deck is empty.
+        - :c:`deck_t* createDeck(int id, int* cardsData, int nCards)` : create a deck (structure deck_t) and fill it with values of the array cardsData (in order). This array is of size nCards;
+
+    You can download the `header <https://inginious.org/admin/uclouvain-lepl1503/edit/task/Bataille/files?action=download&path=/student/help_functions.h>`_ file containing helper functions and their `implémentations <https://inginious.org/admin/uclouvain-lepl1503/edit/task/Bataille/files?action=download&path=/student/help_functions.c>`_ using these links.
+
+    Notice :
+
+    - Be careful about the order when enqueuing the cards into the winner deck.
+
+    - The order is defined by the player's order. So if player 1 loses, his card must be the first to be enqueued
+
+    - The first player (in memory and not in id) plays before the second, etc.
+
+    - In case of draw between players, each player must play 2 cards and the winner is the one with the card of highest value accross all cards that have been drawn. If there is still a draw between players, repeat the process until a player win.
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Bataille
+network_grading: false
+problems:
+    simulateOneRound:
+        type: code
+        name: Simulation de tours
+        header: |-
+            The simulateOneRound function simulate 1 round and modify the player's deck. It doesn't return anything.
+
+                .. code-block:: c
+
+                    /*
+                     * @pre playersDeck != NULL, manyPlayers > 0
+                     * @post simulate 1 round and modify the player's deck (if there is a draw, see the upper note about it)
+                     */
+                    void simulateOneRound(deck_t** playersDeck, int manyPlayers);
+        language: c
+        default: ''
+    guessWhoWin:
+        type: code
+        name: Le dernier debout
+        header: |-
+            The guessWhoWins function simulate at most n rounds, and if a player possess all the cards in his deck, he won, the game stops, and the function returns the id of this player.
+
+                .. code-block:: c
+
+                    /*
+                     * @pre playersDeck != NULL, manyPlayers > 0, maxRounds > 0
+                     * @post return the id of the winner, or -1 if game isn't ended yet
+                     */
+                    int guessWhoWins(deck_t **playersDeck, int manyPlayers, int maxRounds);
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

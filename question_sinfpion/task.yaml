@@ -1,0 +1,81 @@
+accessible: true
+author: Alexandra Onciul Anthony Doeraene
+categories: []
+contact_url: ''
+context: |-
+    Aujourd’hui, c’est le jour des éliminations. Chaque joueur de notre jeu télévisé se voit attribué un score en fonction de ses performances aux épreuves précédentes. L’ensemble des joueurs est représentée par une liste chainée. Chaque noeud représente un joueur et la valeur associée au noeud représente le score. Pour se faire il faudra écrire 2 fonctions.
+
+    Premièrement, vous devez implémenter une fonction qui parcoure la structure chainée afin de trouver l’index de celui ayant le plus petit score, si deux joueurs possèdent le même score on considère le premier dans la liste comme celui qui sera éliminé.
+
+
+    Exemples d'utilisation:
+
+    - :code:`findMinIndex([2,4,-7])` retourne :code:`2`;
+
+    - :code:`findMinIndex([12,-42,-17, 6])` retourne :code:`1`;
+
+    Ensuite, une fois l’index du plus petit score trouvé, il faut supprimer ce noeud et retourner la valeur du noeud supprimé, il faut savoir faire peur aux participants restants avec le score du dernier éliminé! Et faire savoir à ceux ayant de moins bons scores qu’ils doivent se bouger au plus vite! Attention il faut prendre en compte les différents cas limites, comme les listes chainées vide ou encore un index trop élevé.
+
+    L’implémentation de la liste chainée est fournie mais à inclure dans votre réponse. N’oubliez pas de libérer la mémoire des noeuds, ce serait bête qu’un des joueurs ne soit pas libéré lorsqu’il perd !
+
+
+    Exemples d’utilisation:
+
+    - :code:`removeTheMinIndex([2 , -1 ,-4], 2)` retourne :code:`-4` et la liste chainée devient :code:`[2,-1]`;
+
+    - :code:`removeTheMinIndex([-22 , -13 ,-74, 3 ,9], 2)` retourne :code:`-74` et la liste chainée devient :code:`[-22 , -13 , 3 ,9]`;
+
+    Les noeuds composants la liste chainée sont implémentés de la manière suivante :
+
+        .. code-block:: c
+
+            typedef struct Node {
+                int value;
+                struct Node* next;
+            } node_l;
+environment_id: cpp
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
+evaluate: best
+file: ''
+groups: false
+input_random: 0
+name: Question pour un Sinfpion
+network_grading: false
+problems:
+    find:
+        type: code
+        name: Find
+        header: |4-
+                .. code-block:: c
+
+                    int findMinIndex(node_l* head);
+                    /*
+                    *@pre head est un pointeur vers la tête de la liste;
+                    *@post retourne l’index du score le moins élevé;
+                    */
+        language: c
+        default: ''
+    remove:
+        type: code
+        name: Remove
+        header: |4-
+                .. code-block:: c
+
+                    int removeTheMinIndex(node_l ** LLhead, int MinIndex);
+                    /*
+                    *@pre **LLhead double pointeur vers la tête de la liste, MinIndex int >=0;
+                    *@post retourne la valeur du noeud supprimé et -1 s’il y a une erreur;
+                    */
+        language: c
+        default: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

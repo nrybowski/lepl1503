@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 #include "student_code.h"
-#include "CTester/CTester.h"
+#include "../../course/common/student/CTester/CTester.h"
 
 /*
  * Generate a file named "file.txt".
@@ -25,7 +25,7 @@ void gen_file(int n){
     if (close(fd) == -1)
         CU_FAIL("Error, can not initialise test file");
 }
-
+int flag = 1;
 /*
  * Test with open fail
  */
@@ -42,10 +42,9 @@ void test_fail_open() {
     SANDBOX_END;
 
     if (ret != -1){
+	flag = 0;
         push_info_msg(_("When the open() function fails, your code does not return -1."));
         CU_FAIL();
-    }else{
-        set_tag("open");
     }
 }
 
@@ -56,19 +55,15 @@ void test_fail_open() {
 void test_empty_file() {
     set_test_metadata("q1", _("Test with empty file"), 1);
     gen_file(0);
-    int ret = 0;
     
     SANDBOX_BEGIN;
-    ret = myfunc("file.txt", "newfile.txt");
+    myfunc("file.txt", "newfile.txt");
     SANDBOX_END;
     
     system("chmod 644 newfile.txt"); //If student does not set permission correctly, we set it to avoid test error
     if (system("diff file.txt newfile.txt") != 0){
+	flag = 0;
         push_info_msg(_("You copy is not identical."));
-        CU_FAIL();
-    }
-    if (ret != 0){
-        push_info_msg(_("When the file is empty, your copy is not identical."));
         CU_FAIL();
     }
 }
@@ -88,10 +83,9 @@ void test_file_permission() {
     system("ls -al file.txt | head -c 10 > PERM_A.txt");
     system("ls -al newfile.txt | head -c 10 > PERM_B.txt");
     if (system("diff PERM_A.txt PERM_B.txt") != 0){
+	flag = 0;
         push_info_msg(_("The permission of the two files are not equals."));
         CU_FAIL();
-    }else{
-        set_tag("permission");
     }
 }
 
@@ -104,21 +98,29 @@ void test_file() {
     set_test_metadata("q1", _("Test with non-empty file"), 2);
     gen_file(122);
     int ret = 0;
+    monitored.memcpy = true;
     
     SANDBOX_BEGIN;
     ret = myfunc("file.txt", "newfile.txt");
     SANDBOX_END;
     
+    monitored.memcpy = false;
+    
     system("chmod 644 newfile.txt"); //If student does not set permission correctly, we set it to avoid test error
     // S_IRUSR|S_IWUSR = 644
     if (system("diff file.txt newfile.txt") != 0){
+	flag = 0;
         push_info_msg(_("You copy is not identical."));
         CU_FAIL();
-    }else{
-        set_tag("copy");
     }
     if (ret != 0){
-        push_info_msg(_("You do not return 0 when the copy should be successful."));
+	flag = 0;
+        push_info_msg(_("You do not return 0 when the copy should be successful. Check the permissions you specified and the hint above related to permissions."));
+        CU_FAIL();
+    }
+    if (stats.memcpy.called != 1){
+        flag = 0;
+        push_info_msg(_("You didn't call memcpy() exactly once"));
         CU_FAIL();
     }
 }
@@ -126,41 +128,108 @@ void test_file() {
 /*
  * Test with some bytes in the file
  */
-void test_file_write_fail() {
-    set_test_metadata("q1", _("Test with normal file (with some syscall failures)"), 1);
+void test_file_mmap_fail() {
+    set_test_metadata("q1", _("Test with normal file (with mmap failures)"), 1);
     gen_file(125);
     int ret = 0;
     
-    monitored.write = true;
-    failures.write = FAIL_FIRST;
-    failures.write_ret = -1;
+    monitored.mmap = true;
+    failures.mmap = FAIL_FIRST;
+    failures.mmap_ret = MAP_FAILED;
     
     SANDBOX_BEGIN;
     ret = myfunc("file.txt", "newfile.txt");
     SANDBOX_END;
 
     if (ret != -1){
-        push_info_msg(_("You do not return -1 when a fail occurs with read() or write()"));
+	flag = 0;
+        push_info_msg(_("You do not return -1 when a fail occurs with mmap()"));
         set_tag("failure_handling");
         CU_FAIL();
     }
 }
-
-void test_stat_fail() {
-    set_test_metadata("q1", _("Test return value when stat() fails"), 1);
+/*
+ * Test with some bytes in the file
+ */
+void test_file_munmap_fail() {
+    set_test_metadata("q1", _("Test with normal file (with munmap failures)"), 1);
     gen_file(125);
     int ret = 0;
     
-    monitored.stat = true;
-    failures.stat = FAIL_ALWAYS;
-    failures.stat_ret = -1;
+    monitored.munmap = true;
+    failures.munmap = FAIL_FIRST;
+    failures.munmap_ret = -1;
     
     SANDBOX_BEGIN;
     ret = myfunc("file.txt", "newfile.txt");
     SANDBOX_END;
 
     if (ret != -1){
-        push_info_msg(_("You do not return -1 when a fail occurs with stat()"));
+	flag = 0;
+        push_info_msg(_("You do not return -1 when a fail occurs with munmap()"));
+        set_tag("failure_handling");
+        CU_FAIL();
+    }
+}
+/*
+ * Test with some bytes in the file
+ */
+void test_file_msync_fail() {
+    set_test_metadata("q1", _("Test with normal file (with msync failures)"), 1);
+    gen_file(125);
+    int ret = 0;
+    
+    monitored.msync = true;
+    failures.msync = FAIL_FIRST;
+    failures.msync_ret = -1;
+    
+    SANDBOX_BEGIN;
+    ret = myfunc("file.txt", "newfile.txt");
+    SANDBOX_END;
+
+    if (ret != -1){
+	flag = 0;
+        push_info_msg(_("You do not return -1 when a fail occurs with msync()"));
+        set_tag("failure_handling");
+        CU_FAIL();
+    }
+}
+void test_file_ftruncate_fail() {
+    set_test_metadata("q1", _("Test with normal file (with ftruncate failures)"), 1);
+    gen_file(125);
+    int ret = 0;
+    
+    monitored.ftruncate = true;
+    failures.ftruncate = FAIL_FIRST;
+    failures.ftruncate_ret = -1;
+    
+    SANDBOX_BEGIN;
+    ret = myfunc("file.txt", "newfile.txt");
+    SANDBOX_END;
+
+    if (ret != -1){
+	flag = 0;
+        push_info_msg(_("You do not return -1 when a fail occurs with ftruncate()"));
+        set_tag("failure_handling");
+        CU_FAIL();
+    }
+}
+void test_stat_fail() {
+    set_test_metadata("q1", _("Test return value when fstat() fails"), 1);
+    gen_file(125);
+    int ret = 0;
+    
+    monitored.fstat = true;
+    failures.fstat = FAIL_ALWAYS;
+    failures.fstat_ret = -1;
+    
+    SANDBOX_BEGIN;
+    ret = myfunc("file.txt", "newfile.txt");
+    SANDBOX_END;
+
+    if (ret != -1){
+	flag = 0;
+        push_info_msg(_("You do not return -1 when a fail occurs with fstat()"));
         set_tag("failure_handling");
         CU_FAIL();
     }
@@ -179,10 +248,10 @@ void test_close() {
     myfunc("file.txt", "newfile.txt");
     SANDBOX_END;
     
-    int close_tag = 0;
     if (stats.close.called != 2){
+	flag = 0;
         push_info_msg(_("You did not close() the two files."));
-        close_tag++;
+
         CU_FAIL();
     }
     
@@ -197,13 +266,15 @@ void test_close() {
     SANDBOX_END;
     
     if(ret != -1){
+	flag = 0;
         push_info_msg(_("When close() fails, your code does not return -1."));
-        close_tag++;
+
         CU_FAIL(); 
     }
-    if(close_tag == 0){
-        set_tag("close");
+    if(flag){
+	set_tag("q1");
     }
+
 }
 
 
@@ -221,19 +292,22 @@ void test_original_integrity() {
     SANDBOX_END;
     
     if (system("diff file.txt file_original.txt") != 0){
+	flag = 0;
         push_info_msg(_("You can not modify the original file"));
         CU_FAIL();
-        set_tag("original_modif");
+
     }
     system("ls -al file.txt | head -c 10 > PERM_FILE_2.txt");
     if (system("diff PERM_FILE_1.txt PERM_FILE_2.txt") != 0){
+	flag = 0;
         push_info_msg(_("You can not modify the permissions of the original file."));
         CU_FAIL();
-        set_tag("original_modif");
+
     }
+
 }
 
 int main(int argc,char** argv){
-    BAN_FUNCS(system, set_tag, fopen, fread, fwrite, fclose, fstat);
-    RUN(test_fail_open, test_empty_file, test_file_permission, test_file, test_file_write_fail, test_stat_fail, test_original_integrity, test_close);
+    BAN_FUNCS(system, set_tag, fopen, fread, fwrite, fclose, read, write);
+    RUN(test_fail_open, test_empty_file, test_file_permission, test_file, test_file_ftruncate_fail,test_file_mmap_fail,test_file_munmap_fail,test_file_msync_fail, test_stat_fail, test_original_integrity, test_close);
 }
